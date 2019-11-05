@@ -1,6 +1,6 @@
 {
-  "name": "@eclass/semantic-release-custom-plugin",
-  "version": "1.0.0",
+  "name": "@eclass/semantic-release-sentry-releases",
+  "version": "0.0.1",
   "description": "semantic-release plugin to deploy app",
   "main": "src/index.js",
   "scripts": {
@@ -13,18 +13,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eclass/template-semantic-release-plugin.git"
+    "url": "https://github.com/eclass/semantic-release-sentry-releases.git"
   },
   "keywords": [
     "release",
-    "semantic-release"
+    "semantic-release",
+    "sentry"
   ],
   "author": "Leonardo Gatica <lgatica@protonmail.com> (https://about.me/lgatica)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eclass/template-semantic-release-plugin/issues"
+    "url": "https://github.com/eclass/semantic-release-sentry-releases/issues"
   },
-  "homepage": "https://github.com/eclass/template-semantic-release-plugin#readme",
+  "homepage": "https://github.com/eclass/semantic-release-sentry-releases#readme",
   "dependencies": {
     "@semantic-release/error": "^2.1.0"
   },

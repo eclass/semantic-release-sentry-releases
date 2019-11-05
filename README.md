@@ -1,12 +1,12 @@
-# @eclass/semantic-release-custom-plugin
+# @eclass/semantic-release-sentry-releases
 
-[![npm](https://img.shields.io/npm/v/@eclass/semantic-release-custom-plugin.svg)](https://www.npmjs.com/package/@eclass/semantic-release-custom-plugin)
-[![build](https://img.shields.io/travis/eclass/semantic-release-custom-plugin.svg)](https://travis-ci.org/eclass/semantic-release-custom-plugin)
-[![downloads](https://img.shields.io/npm/dt/@eclass/semantic-release-custom-plugin.svg)](https://www.npmjs.com/package/@eclass/semantic-release-custom-plugin)
-[![dependencies](https://img.shields.io/david/eclass/semantic-release-custom-plugin.svg)](https://david-dm.org/eclass/semantic-release-custom-plugin)
-[![devDependency Status](https://img.shields.io/david/dev/eclass/semantic-release-custom-plugin.svg)](https://david-dm.org/eclass/semantic-release-custom-plugin#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/github/eclass/semantic-release-custom-plugin/badge.svg?branch=master)](https://coveralls.io/github/eclass/semantic-release-custom-plugin?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f84f0bcb39c9a5c5fb99/maintainability)](https://codeclimate.com/github/eclass/semantic-release-custom-plugin/maintainability)
+[![npm](https://img.shields.io/npm/v/@eclass/semantic-release-sentry-releases.svg)](https://www.npmjs.com/package/@eclass/semantic-release-sentry-releases)
+[![build](https://img.shields.io/travis/eclass/semantic-release-sentry-releases.svg)](https://travis-ci.org/eclass/semantic-release-sentry-releases)
+[![downloads](https://img.shields.io/npm/dt/@eclass/semantic-release-sentry-releases.svg)](https://www.npmjs.com/package/@eclass/semantic-release-sentry-releases)
+[![dependencies](https://img.shields.io/david/eclass/semantic-release-sentry-releases.svg)](https://david-dm.org/eclass/semantic-release-sentry-releases)
+[![devDependency Status](https://img.shields.io/david/dev/eclass/semantic-release-sentry-releases.svg)](https://david-dm.org/eclass/semantic-release-sentry-releases#info=devDependencies)
+[![Coverage Status](https://coveralls.io/repos/github/eclass/semantic-release-sentry-releases/badge.svg?branch=master)](https://coveralls.io/github/eclass/semantic-release-sentry-releases?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f84f0bcb39c9a5c5fb99/maintainability)](https://codeclimate.com/github/eclass/semantic-release-sentry-releases/maintainability)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 > [semantic-release](https://github.com/semantic-release/semantic-release) plugin to deploy app
@@ -19,7 +19,7 @@
 ## Install
 
 ```bash
-npm i -D @eclass/semantic-release-custom-plugin
+npm i -D @eclass/semantic-release-sentry-releases
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     "@semantic-release/npm",
     "@semantic-release/git",
     "@semantic-release/gitlab",
-    "@eclass/semantic-release-custom-plugin"
+    "@eclass/semantic-release-sentry-releases"
   ]
 }
 ```
@@ -55,7 +55,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     "@semantic-release/npm",
     "@semantic-release/git",
     "@semantic-release/gitlab",
-    "@eclass/semantic-release-custom-plugin"
+    "@eclass/semantic-release-sentry-releases"
   ]
 }
 ```
