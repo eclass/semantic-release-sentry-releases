@@ -1,0 +1,115 @@
+{
+  "name": "@eclass/semantic-release-custom-plugin",
+  "version": "1.0.0",
+  "description": "semantic-release plugin to deploy app",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint . --fix",
+    "format": "prettier-standard '{src,test}/**/*.js'",
+    "test": "nyc mocha test"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eclass/template-semantic-release-plugin.git"
+  },
+  "keywords": [
+    "release",
+    "semantic-release"
+  ],
+  "author": "Leonardo Gatica <lgatica@protonmail.com> (https://about.me/lgatica)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eclass/template-semantic-release-plugin/issues"
+  },
+  "homepage": "https://github.com/eclass/template-semantic-release-plugin#readme",
+  "dependencies": {
+    "@semantic-release/error": "^2.1.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.2.0",
+    "@commitlint/config-conventional": "8.2.0",
+    "@eclass/eslint-config": "1.1.3",
+    "@eclass/semantic-release-npm-github-config": "3.0.0",
+    "@semantic-release/changelog": "3.0.5",
+    "@semantic-release/git": "7.0.18",
+    "@types/chai": "4.2.4",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.12.5",
+    "chai": "4.2.0",
+    "eslint": "6.6.0",
+    "eslint-plugin-array-func": "3.1.3",
+    "eslint-plugin-eslint-comments": "3.1.2",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsdoc": "17.1.0",
+    "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-sonarjs": "0.4.0",
+    "eslint-plugin-standard": "4.0.1",
+    "husky": "3.0.9",
+    "lint-staged": "9.4.2",
+    "mocha": "6.2.2",
+    "nyc": "14.1.1",
+    "nyc-config-common": "1.0.1",
+    "prettier-standard": "15.0.1",
+    "semantic-release": "15.13.30",
+    "sinon": "7.5.0",
+    "stream-buffers": "3.0.2",
+    "tempy": "0.3.0"
+  },
+  "peerDependencies": {
+    "semantic-release": ">=11.0.0 <16.0.0"
+  },
+  "eslintConfig": {
+    "extends": "@eclass"
+  },
+  "eslintIgnore": [
+    "coverage"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "{src,test}/**/*.js": [
+      "eslint --fix",
+      "prettier-standard",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "renovate": {
+    "automerge": "minor",
+    "extends": [
+      "config:js-lib"
+    ]
+  },
+  "release": {
+    "extends": "@eclass/semantic-release-npm-github-config",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  },
+  "nyc": {
+    "extends": "nyc-config-common"
+  }
+}

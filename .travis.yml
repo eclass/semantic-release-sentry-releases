@@ -1,0 +1,37 @@
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+    - .nyc_output
+node_js:
+  - "12.13.0"
+notifications:
+  email: false
+stages:
+  - test
+  - coverage
+  - name: deploy
+    if: branch = master
+jobs:
+  include:
+    - stage: test
+      name: eslint
+      script: npx eslint .
+    - stage: test
+      name: commitlint
+      before_script:
+        - npm i -g @commitlint/travis-cli
+      script: commitlint-travis
+    - stage: test
+      name: test
+      script: npm t
+    - stage: coverage
+      before_script:
+        - npm i -g coveralls
+      script:
+        - npx nyc check-coverage --lines 85 --per-file
+      after_success:
+        - npx nyc report > lcov.info
+        - coveralls < lcov.info
+    - stage: deploy
+      script: npx semantic-release
