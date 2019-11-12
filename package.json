@@ -35,7 +35,7 @@
     "@eclass/semantic-release-npm-github-config": "3.0.0",
     "@semantic-release/changelog": "3.0.5",
     "@semantic-release/git": "7.0.18",
-    "@types/chai": "4.2.4",
+    "@types/chai": "4.2.5",
     "@types/mocha": "5.2.7",
     "@types/node": "12.12.5",
     "chai": "4.2.0",
