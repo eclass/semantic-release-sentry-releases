@@ -29,7 +29,7 @@ jobs:
       before_script:
         - npm i -g coveralls
       script:
-        - npx nyc check-coverage --lines 85 --per-file
+        - npx nyc check-coverage --lines 100 --per-file
       after_success:
         - npx nyc report > lcov.info
         - coveralls < lcov.info

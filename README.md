@@ -9,7 +9,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f84f0bcb39c9a5c5fb99/maintainability)](https://codeclimate.com/github/eclass/semantic-release-sentry-releases/maintainability)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-> [semantic-release](https://github.com/semantic-release/semantic-release) plugin to deploy app
+> [semantic-release](https://github.com/semantic-release/semantic-release) plugin to create releases in [sentry](https://docs.sentry.io/workflow/releases/?platform=browsernpm#create-release)
 
 | Step               | Description                                                                                 |
 |--------------------|---------------------------------------------------------------------------------------------|
@@ -44,7 +44,15 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 | Variable             | Description                                                       |
 | -------------------- | ----------------------------------------------------------------- |
-| `CUSTOM_ENV` | A custom env var |
+| `SENTRY_TOKEN` | Sentry token created in [profile](https://docs.sentry.io/api/auth/#id1) |
+| `SENTRY_ORG` | Sentry orgnazitaion name |
+| `SENTRY_PROJECT` | Sentry project name |
+
+### Options
+
+| Variable  | Description                                                       |
+| --------- | ----------------------------------------------------------------- |
+| `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
 
 ### Examples
 
@@ -55,7 +63,12 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     "@semantic-release/npm",
     "@semantic-release/git",
     "@semantic-release/gitlab",
-    "@eclass/semantic-release-sentry-releases"
+    [
+      "@eclass/semantic-release-sentry-releases",
+      {
+        "tagsUrl": "https://github.com/owner/repo/releases/tag/"
+      }
+    ]
   ]
 }
 ```

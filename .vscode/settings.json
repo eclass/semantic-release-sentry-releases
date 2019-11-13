@@ -1,0 +1,10 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "javascript.validate.enable": true,
+  "javascript.implicitProjectConfig.checkJs": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.autoFixOnSave": true,
+  "debug.node.autoAttach": "on"
+}

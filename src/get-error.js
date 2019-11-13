@@ -9,7 +9,7 @@ const ERROR_DEFINITIONS = require('./errors')
  * @example
  * const throw getError('CUSTOMERROR')
  */
-module.exports = (code, ctx = {}) => {
+module.exports = (code, ctx) => {
   const { message, details } = ERROR_DEFINITIONS.get(code)(ctx)
   return new SemanticReleaseError(message, code, details)
 }
