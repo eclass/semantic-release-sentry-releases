@@ -59,7 +59,7 @@
     "nyc": "14.1.1",
     "nyc-config-common": "1.0.1",
     "prettier-standard": "15.0.1",
-    "semantic-release": "15.13.30"
+    "semantic-release": "15.13.31"
   },
   "peerDependencies": {
     "semantic-release": ">=11.0.0 <16.0.0"
