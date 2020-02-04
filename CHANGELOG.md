@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v1.0.0...v2.0.0) (2020-02-04)
+
+
+### Bug Fixes
+
+* **env:** rename SENTRY_TOKEN to SENTRY_AUTH_TOKEN ([def5039](https://github.com/eclass/semantic-release-sentry-releases/commit/def5039ec85bfc143762b18501e6cff13ffa6a23)), closes [#1](https://github.com/eclass/semantic-release-sentry-releases/issues/1)
+
+
+### BREAKING CHANGES
+
+* **env:** Rename environment variable SENTRY_TOKEN to SENTRY_AUTH_TOKEN
+
 # 1.0.0 (2019-11-13)
 
 
