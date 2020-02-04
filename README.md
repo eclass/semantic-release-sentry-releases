@@ -1,7 +1,7 @@
 # @eclass/semantic-release-sentry-releases
 
 [![npm](https://img.shields.io/npm/v/@eclass/semantic-release-sentry-releases.svg)](https://www.npmjs.com/package/@eclass/semantic-release-sentry-releases)
-[![build](https://img.shields.io/travis/eclass/semantic-release-sentry-releases.svg)](https://travis-ci.org/eclass/semantic-release-sentry-releases)
+![Node.js CI](https://github.com/eclass/semantic-release-sentry-releases/workflows/Node.js%20CI/badge.svg)
 [![downloads](https://img.shields.io/npm/dt/@eclass/semantic-release-sentry-releases.svg)](https://www.npmjs.com/package/@eclass/semantic-release-sentry-releases)
 [![dependencies](https://img.shields.io/david/eclass/semantic-release-sentry-releases.svg)](https://david-dm.org/eclass/semantic-release-sentry-releases)
 [![devDependency Status](https://img.shields.io/david/dev/eclass/semantic-release-sentry-releases.svg)](https://david-dm.org/eclass/semantic-release-sentry-releases#info=devDependencies)
