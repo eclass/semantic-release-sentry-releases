@@ -16,7 +16,7 @@ const { verify } = require('./request')
 module.exports = async (pluginConfig, ctx) => {
   try {
     const errors = []
-    if (!ctx.env.SENTRY_TOKEN) {
+    if (!ctx.env.SENTRY_AUTH_TOKEN) {
       errors.push(getError('ENOSENTRYTOKEN', ctx))
     }
     if (!ctx.env.SENTRY_ORG) {
@@ -31,7 +31,7 @@ module.exports = async (pluginConfig, ctx) => {
     if (errors.length > 0) {
       throw new AggregateError(errors)
     }
-    return await verify(ctx.env.SENTRY_TOKEN, ctx.env.SENTRY_ORG)
+    return await verify(ctx.env.SENTRY_AUTH_TOKEN, ctx.env.SENTRY_ORG)
   } catch (err) {
     if (err instanceof AggregateError) {
       throw err

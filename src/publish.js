@@ -34,7 +34,11 @@ module.exports = async (pluginConfig, ctx) => {
       projects: [ctx.env.SENTRY_PROJECT]
     }
     if (url !== '') data.url = url
-    return await createRelease(data, ctx.env.SENTRY_TOKEN, ctx.env.SENTRY_ORG)
+    return await createRelease(
+      data,
+      ctx.env.SENTRY_AUTH_TOKEN,
+      ctx.env.SENTRY_ORG
+    )
   } catch (err) {
     throw getError('ESENTRYDEPLOY', ctx)
   }

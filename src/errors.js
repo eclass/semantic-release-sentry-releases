@@ -31,10 +31,10 @@ module.exports = new Map([
       message: 'No sentry token specified.',
       details: `An [sentry token](${linkify(
         'README.md#environment-variables'
-      )}) must be created and set in the \`SENTRY_TOKEN\` environment variable on your CI environment.
+      )}) must be created and set in the \`SENTRY_AUTH_TOKEN\` environment variable on your CI environment.
 
 
-Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id1) and to set it in the \`SENTRY_TOKEN\` environment variable on your CI environment. The token must allow to create relases.`
+Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id1) and to set it in the \`SENTRY_AUTH_TOKEN\` environment variable on your CI environment. The token must allow to create relases.`
     })
   ],
   [
@@ -86,10 +86,10 @@ Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id
       message: 'Invalid sentry token.',
       details: `The [sentry token](${linkify(
         'README.md#environment-variables'
-      )}) configured in the \`SENTRY_TOKEN\` environment variable must be a valid [token](https://docs.sentry.io/api/auth/#id1) allowing to create releases to org \`${
+      )}) configured in the \`SENTRY_AUTH_TOKEN\` environment variable must be a valid [token](https://docs.sentry.io/api/auth/#id1) allowing to create releases to org \`${
         ctx.env.SENTRY_ORG
       }\`.
-Please make sure to set the \`SENTRY_TOKEN\` environment variable in your CI with the exact value of the sentry token.`
+Please make sure to set the \`SENTRY_AUTH_TOKEN\` environment variable in your CI with the exact value of the sentry token.`
     })
   ],
   [

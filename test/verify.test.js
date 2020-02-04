@@ -31,7 +31,7 @@ describe('Verify', () => {
       .replyWithError('server error')
   })
 
-  it('Return SemanticReleaseError if a SENTRY_TOKEN environment variable is not defined', async () => {
+  it('Return SemanticReleaseError if a SENTRY_AUTH_TOKEN environment variable is not defined', async () => {
     try {
       // @ts-ignore
       await verify({}, { env })
@@ -44,7 +44,7 @@ describe('Verify', () => {
 
   it('Return SemanticReleaseError if a SENTRY_ORG environment variable is not defined', async () => {
     try {
-      env.SENTRY_TOKEN = 'invalid'
+      env.SENTRY_AUTH_TOKEN = 'invalid'
       delete env.SENTRY_ORG
       // @ts-ignore
       await verify({}, { env })
@@ -57,7 +57,7 @@ describe('Verify', () => {
 
   it('Return SemanticReleaseError if a SENTRY_PROJECT environment variable is not defined', async () => {
     try {
-      env.SENTRY_TOKEN = 'invalid'
+      env.SENTRY_AUTH_TOKEN = 'invalid'
       env.SENTRY_ORG = 'invalid'
       delete env.SENTRY_PROJECT
       // @ts-ignore
@@ -71,7 +71,7 @@ describe('Verify', () => {
 
   it('Return SemanticReleaseError if a tagsUrl is invalid', async () => {
     try {
-      env.SENTRY_TOKEN = 'invalid'
+      env.SENTRY_AUTH_TOKEN = 'invalid'
       env.SENTRY_ORG = 'invalid'
       env.SENTRY_PROJECT = 'project'
       // @ts-ignore
@@ -85,7 +85,7 @@ describe('Verify', () => {
 
   it('Return SemanticReleaseError if a get a error from sentry', async () => {
     try {
-      env.SENTRY_TOKEN = 'valid'
+      env.SENTRY_AUTH_TOKEN = 'valid'
       env.SENTRY_ORG = 'error'
       env.SENTRY_PROJECT = 'project'
       // @ts-ignore
@@ -98,7 +98,7 @@ describe('Verify', () => {
 
   it('Return SemanticReleaseError if a SENTRY_ORG environment variable is invalid', async () => {
     try {
-      env.SENTRY_TOKEN = 'valid'
+      env.SENTRY_AUTH_TOKEN = 'valid'
       env.SENTRY_ORG = 'invalid'
       env.SENTRY_PROJECT = 'project'
       // @ts-ignore
@@ -109,9 +109,9 @@ describe('Verify', () => {
     }
   })
 
-  it('Return SemanticReleaseError if a SENTRY_TOKEN environment variable is invalid', async () => {
+  it('Return SemanticReleaseError if a SENTRY_AUTH_TOKEN environment variable is invalid', async () => {
     try {
-      env.SENTRY_TOKEN = 'invalid'
+      env.SENTRY_AUTH_TOKEN = 'invalid'
       env.SENTRY_ORG = 'valid'
       env.SENTRY_PROJECT = 'project'
       // @ts-ignore
@@ -123,7 +123,7 @@ describe('Verify', () => {
   })
 
   it('Verify alias from a custom environmen variable', async () => {
-    env.SENTRY_TOKEN = 'valid'
+    env.SENTRY_AUTH_TOKEN = 'valid'
     env.SENTRY_ORG = 'valid'
     env.SENTRY_PROJECT = 'project'
     // @ts-ignore

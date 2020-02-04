@@ -44,7 +44,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 | Variable             | Description                                                       |
 | -------------------- | ----------------------------------------------------------------- |
-| `SENTRY_TOKEN` | Sentry token created in [profile](https://docs.sentry.io/api/auth/#id1) |
+| `SENTRY_AUTH_TOKEN` | Sentry token created in [profile](https://docs.sentry.io/api/auth/#id1) |
 | `SENTRY_ORG` | Sentry orgnazitaion name |
 | `SENTRY_PROJECT` | Sentry project name |
 

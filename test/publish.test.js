@@ -8,7 +8,7 @@ describe('Publish', () => {
     env: {
       SENTRY_ORG: 'valid',
       SENTRY_PROJECT: 'error',
-      SENTRY_TOKEN: 'valid'
+      SENTRY_AUTH_TOKEN: 'valid'
     },
     commits: [
       {
