@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.0.1...v2.1.0) (2020-02-05)
+
+
+### Features
+
+* add create deploy to new release ([1211e9d](https://github.com/eclass/semantic-release-sentry-releases/commit/1211e9da291c270000cd0e594bbb2fab9462c9cf))
+
 ## [2.0.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.0.0...v2.0.1) (2020-02-05)
 
 
