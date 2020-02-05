@@ -24,7 +24,7 @@ module.exports = async (pluginConfig, ctx) => {
     const data = {
       commits: ctx.commits.map(commit => ({
         id: commit.hash,
-        repository: pkg.repository,
+        repository: pkg.repository.url,
         message: commit.message,
         author_name: commit.author.name,
         author_email: commit.author.email,
