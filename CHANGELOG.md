@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.0.0...v2.0.1) (2020-02-05)
+
+
+### Bug Fixes
+
+* **publish:** fix repository ([b6156e9](https://github.com/eclass/semantic-release-sentry-releases/commit/b6156e9003c11116d8b6949120e7329956fc514d))
+
 # [2.0.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v1.0.0...v2.0.0) (2020-02-04)
 
 
