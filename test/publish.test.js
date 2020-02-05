@@ -64,6 +64,15 @@ describe('Publish', () => {
         url: null,
         version: '1.0.0'
       })
+      .post('/api/0/organizations/valid/releases/1.0.0/deploys/')
+      .reply(201, {
+        name: 'amazon',
+        url: 'https://api.example.com/',
+        environment: 'production',
+        dateStarted: '2020-02-05T10:29:59Z',
+        dateFinished: '2020-02-05T10:30:43Z',
+        id: '5044917'
+      })
   })
 
   it(SERVER_ERROR_TITLE, async () => {
@@ -102,6 +111,6 @@ describe('Publish', () => {
     ctx.env.SENTRY_PROJECT = 'project'
     // @ts-ignore
     const result = await publish({ tagsUrl }, ctx)
-    expect(result.version).to.equal('1.0.0')
+    expect(result.release.version).to.equal('1.0.0')
   })
 })

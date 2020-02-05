@@ -1,7 +1,7 @@
 const SemanticReleaseError = require('@semantic-release/error')
 const ERROR_DEFINITIONS = require('./errors')
 
-/** @typedef {import('semantic-release').Context} Context */
+/** @typedef {import('./types').Context} Context */
 /**
  * @param {string} code -
  * @param {Context} ctx -

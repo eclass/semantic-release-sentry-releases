@@ -4,8 +4,8 @@
   "description": "semantic-release plugin to create releases in sentry",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint . --fix",
-    "format": "prettier-standard '{src,test}/**/*.js'",
+    "lint": "prettier-standard --lint '{src,test}/**/*.js'",
+    "ts-compile-check": "tsc -p tsconfig.json --noEmit",
     "test": "nyc mocha test"
   },
   "engines": {
@@ -59,7 +59,8 @@
     "nyc": "15.0.0",
     "nyc-config-common": "1.0.1",
     "prettier-standard": "16.1.0",
-    "semantic-release": "17.0.2"
+    "semantic-release": "17.0.2",
+    "typescript": "3.7.5"
   },
   "peerDependencies": {
     "semantic-release": ">=11.0.0 <18.0.0"
@@ -99,9 +100,9 @@
   },
   "nyc": {
     "extends": "nyc-config-common",
-    "branches": 100,
-    "lines": 100,
+    "branches": 70,
+    "lines": 80,
     "functions": 100,
-    "statements": 100
+    "statements": 80
   }
 }

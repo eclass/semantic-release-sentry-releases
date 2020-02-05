@@ -12,7 +12,7 @@ const [homepage] = pkg.homepage.split('#')
 const linkify = file => `${homepage}/blob/master/${file}`
 
 /**
- * @typedef {import('semantic-release').Context} Context
+ * @typedef {import('./types').Context} Context
  */
 /**
  * @typedef {Object} SemanticReleaseError

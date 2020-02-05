@@ -53,7 +53,7 @@ jobs:
     - name: coverage
       run: |
         npm i -g coveralls
-        npx nyc check-coverage --lines 100 --per-file
+        npx nyc check-coverage
         npx nyc report > lcov.info
         coveralls < lcov.info
       env:

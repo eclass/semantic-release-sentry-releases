@@ -13,8 +13,8 @@
 
 | Step               | Description                                                                                 |
 |--------------------|---------------------------------------------------------------------------------------------|
-| `verifyConditions` | Verify the presence of the `CUSTOM_ENV` environment variable. |
-| `publish`          | Deploy app.                                                                   |
+| `verifyConditions` | Verify the presence of the `SENTRY_AUTH_TOKEN` `SENTRY_ORG` and `SENTRY_PROJECT` environment variable. |
+| `publish`          | Create release and deploy in sentry project.                                                                   |
 
 ## Install
 
@@ -47,12 +47,18 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 | `SENTRY_AUTH_TOKEN` | Sentry token created in [profile](https://docs.sentry.io/api/auth/#id1) |
 | `SENTRY_ORG` | Sentry orgnazitaion name |
 | `SENTRY_PROJECT` | Sentry project name |
+| `DEPLOY_START` | Sentry deploy start timestamp. Optional for deploy |
+| `DEPLOY_END` | Sentry deploy end timestamp. Optional for deploy |
 
 ### Options
 
 | Variable  | Description                                                       |
 | --------- | ----------------------------------------------------------------- |
+| `repositoryUrl` | A valid url for add link to commits of new release. Optional. Ex: https://github.com/owner/repo |
 | `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
+| `environment` | Sentry environment. Optional for deploy. Default production |
+| `deployName` | Deploy name. Optional for deploy |
+| `deployUrl` | Deploy url. Optional for deploy |
 
 ### Examples
 
@@ -66,6 +72,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     [
       "@eclass/semantic-release-sentry-releases",
       {
+        "repositoryUrl": "https://github.com/owner/repo",
         "tagsUrl": "https://github.com/owner/repo/releases/tag/"
       }
     ]

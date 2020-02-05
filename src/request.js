@@ -34,18 +34,27 @@ const TYPES = {
  * @property {string} version -
  */
 /**
+ * @typedef {Object} SentryDeploySuccessResponse
+ * @property {string} id -
+ * @property {string} name -
+ * @property {string} url -
+ * @property {string} environment -
+ * @property {string} dateStarted -
+ * @property {string} dateFinished -
+ */
+/**
  * @typedef {Object} SentryReleasePatchSet
  * @property {string} path -
  * @property {PatchSetType} type -
  */
 /**
  * @typedef {Object} SentryReleaseCommit
- * @property {string} repository -
- * @property {string} message -
+ * @property {string} [repository] -
+ * @property {string} [message] -
  * @property {Array<SentryReleasePatchSet>} [patch_set] -
- * @property {string} author_name -
+ * @property {string} [author_name] -
  * @property {string} [author_email] -
- * @property {string} timestamp -
+ * @property {string} [timestamp] -
  */
 /**
  * @typedef {Object} SentryReleaseParams
@@ -58,19 +67,28 @@ const TYPES = {
  * @property {Array<string>} [refs] -
  */
 /**
- * @param {SentryReleaseParams} data -
- * @param {string} token -
- * @param {string} org -
- * @returns {Promise<SentryReleaseSuccessResponse>} -
- * @example
- * await createRelease(data, token, org)
+ * @typedef {Object} SentryDeployParams
+ * @property {string} environment -
+ * @property {string} [name] -
+ * @property {string} [url] -
+ * @property {string} [dateStarted] -
+ * @property {string} [dateFinished] -
  */
-const createRelease = (data, token, org) =>
+
+/**
+ * @param {string} path -
+ * @param {*} data -
+ * @param {string} token -
+ * @returns {Promise<*>} -
+ * @example
+ * await request(path, data, token)
+ */
+const request = (path, data, token) =>
   new Promise((resolve, reject) => {
     const postData = JSON.stringify(data)
     const options = {
       hostname: 'sentry.io',
-      path: `/api/0/organizations/${org}/releases/`,
+      path,
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -103,6 +121,35 @@ const createRelease = (data, token, org) =>
   })
 
 /**
+ * @param {SentryReleaseParams} data -
+ * @param {string} token -
+ * @param {string} org -
+ * @returns {Promise<SentryReleaseSuccessResponse>} -
+ * @example
+ * await createRelease(data, token, org)
+ */
+const createRelease = (data, token, org) => {
+  return request(`/api/0/organizations/${org}/releases/`, data, token)
+}
+
+/**
+ * @param {SentryDeployParams} data -
+ * @param {string} token -
+ * @param {string} org -
+ * @param {string} version -
+ * @returns {Promise<SentryDeploySuccessResponse>} -
+ * @example
+ * await createDeploy(data, token, org, version)
+ */
+const createDeploy = (data, token, org, version) => {
+  return request(
+    `/api/0/organizations/${org}/releases/${version}/deploys/`,
+    data,
+    token
+  )
+}
+
+/**
  * @param {string} token -
  * @param {string} org -
  * @returns {Promise<*>} -
@@ -130,4 +177,4 @@ const verify = (token, org) =>
     req.end()
   })
 
-module.exports = { createRelease, verify }
+module.exports = { createRelease, createDeploy, verify }
