@@ -60,7 +60,7 @@
     "nyc-config-common": "1.0.1",
     "prettier-standard": "16.1.0",
     "semantic-release": "17.0.4",
-    "typescript": "3.7.5"
+    "typescript": "3.8.2"
   },
   "peerDependencies": {
     "semantic-release": ">=11.0.0 <18.0.0"
