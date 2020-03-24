@@ -80,8 +80,7 @@
   "lint-staged": {
     "{src,test}/**/*.js": [
       "eslint --fix",
-      "prettier-standard",
-      "git add"
+      "prettier-standard"
     ]
   },
   "commitlint": {
