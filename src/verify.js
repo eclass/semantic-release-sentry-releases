@@ -19,10 +19,11 @@ module.exports = async (pluginConfig, ctx) => {
     if (!ctx.env.SENTRY_AUTH_TOKEN) {
       errors.push(getError('ENOSENTRYTOKEN', ctx))
     }
-    if (!ctx.env.SENTRY_ORG) {
+    const org = ctx.env.SENTRY_ORG || pluginConfig.org
+    if (!org) {
       errors.push(getError('ENOSENTRYORG', ctx))
     }
-    if (!ctx.env.SENTRY_PROJECT) {
+    if (!ctx.env.SENTRY_PROJECT && !pluginConfig.project) {
       errors.push(getError('ENOSENTRYPROJECT', ctx))
     }
     if (pluginConfig.tagsUrl && !/http/.test(pluginConfig.tagsUrl)) {
@@ -31,7 +32,7 @@ module.exports = async (pluginConfig, ctx) => {
     if (errors.length > 0) {
       throw new AggregateError(errors)
     }
-    return await verify(ctx.env.SENTRY_AUTH_TOKEN, ctx.env.SENTRY_ORG)
+    return await verify(ctx.env.SENTRY_AUTH_TOKEN, org)
   } catch (err) {
     if (err instanceof AggregateError) {
       throw err

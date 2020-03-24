@@ -54,6 +54,8 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 | Variable  | Description                                                       |
 | --------- | ----------------------------------------------------------------- |
+| `project` | Sentry project name. Optional. Required if not present in environment variables |
+| `org` | Sentry organization name. Optional. Required if not present in environment variables |
 | `repositoryUrl` | A valid url for add link to commits of new release. Optional. Ex: https://github.com/owner/repo |
 | `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
 | `environment` | Sentry environment. Optional for deploy. Default production |

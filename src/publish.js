@@ -41,13 +41,14 @@ module.exports = async (pluginConfig, ctx) => {
         return newCommit
       }),
       version: ctx.nextRelease.version,
-      projects: [ctx.env.SENTRY_PROJECT]
+      projects: [ctx.env.SENTRY_PROJECT || pluginConfig.project]
     }
     if (url !== '') releaseDate.url = url
+    const org = ctx.env.SENTRY_ORG || pluginConfig.org
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
-      ctx.env.SENTRY_ORG
+      org
     )
     /** @type {SentryDeployParams} */
     const deployData = {
@@ -68,7 +69,7 @@ module.exports = async (pluginConfig, ctx) => {
     const deploy = await createDeploy(
       deployData,
       ctx.env.SENTRY_AUTH_TOKEN,
-      ctx.env.SENTRY_ORG,
+      org,
       ctx.nextRelease.version
     )
     return { release, deploy }

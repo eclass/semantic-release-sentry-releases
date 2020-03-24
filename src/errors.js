@@ -47,7 +47,7 @@ Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id
       message: 'No sentry org specified.',
       details: `An [sentry org](${linkify(
         'README.md#environment-variables'
-      )}) must be created and set in the \`SENTRY_ORG\` environment variable on your CI environment.`
+      )}) must be created and set in the \`SENTRY_ORG\` environment variable on your CI environment or set org in plugin config.`
     })
   ],
   [
@@ -60,7 +60,7 @@ Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id
       message: 'No sentry project specified.',
       details: `An [sentry project](${linkify(
         'README.md#environment-variables'
-      )}) must be created and set in the \`SENTRY_PROJECT\` environment variable on your CI environment.`
+      )}) must be created and set in the \`SENTRY_PROJECT\` environment variable on your CI environment or set project in plugin config.`
     })
   ],
   [

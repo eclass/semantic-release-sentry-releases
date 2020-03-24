@@ -13,4 +13,6 @@ export interface Config extends SemanticReleaseConfig {
   environment?: string
   deployName?: string
   deployUrl?: string
+  org?: string
+  project?: string
 }
