@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.1.0...v2.2.0) (2020-03-24)
+
+
+### Bug Fixes
+
+* **deps:** fix 5 vulnerabilities ([0bf0b15](https://github.com/eclass/semantic-release-sentry-releases/commit/0bf0b15ec27d491edc072c42a521131aa7ac57bf))
+
+
+### Features
+
+* **config:** add project and org plugin config ([5eb197d](https://github.com/eclass/semantic-release-sentry-releases/commit/5eb197d37762886850866c295296347199b87823))
+
 # [2.1.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.0.1...v2.1.0) (2020-02-05)
 
 
