@@ -61,6 +61,9 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 | `environment` | Sentry environment. Optional for deploy. Default production |
 | `deployName` | Deploy name. Optional for deploy |
 | `deployUrl` | Deploy url. Optional for deploy |
+| `sourcemaps` | Directory with sourcemaps. Example `dist`. Optional for upload sourcemaps |
+| `urlPrefix` | URL prefix for sourcemaps. Example `~/dist`. Optional for upload sourcemaps |
+| `rewrite` | Boolean to indicate rewrite sourcemaps. Default `false`. Optional for upload sourcemaps |
 
 ### Examples
 
@@ -76,6 +79,33 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
       {
         "repositoryUrl": "https://github.com/owner/repo",
         "tagsUrl": "https://github.com/owner/repo/releases/tag/"
+      }
+    ]
+  ]
+}
+```
+
+#### Upload sourcemaps
+```json
+{
+  "plugins": [
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git",
+    "@semantic-release/gitlab",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "npm run build"
+      }
+    ],
+    [
+      "@eclass/semantic-release-sentry-releases",
+      {
+        "repositoryUrl": "https://github.com/owner/repo",
+        "tagsUrl": "https://github.com/owner/repo/releases/tag/",
+        "sourcemaps": "dist",
+        "urlPrefix": "~/dist"
       }
     ]
   ]

@@ -1,6 +1,21 @@
+const path = require('path')
 const { describe, it, beforeEach } = require('mocha')
 const { expect } = require('chai')
 const nock = require('nock')
+const tempWrite = require('temp-write')
+const mock = require('mock-require')
+
+// eslint-disable-next-line require-jsdoc
+class SentryCliMock {
+  // eslint-disable-next-line require-jsdoc
+  constructor () {
+    this.releases = {
+      uploadSourceMaps: () => Promise.resolve()
+    }
+  }
+}
+mock('@sentry/cli', SentryCliMock)
+
 const publish = require('../src/publish')
 
 describe('Publish', () => {
@@ -18,7 +33,8 @@ describe('Publish', () => {
         committerDate: new Date().toISOString()
       }
     ],
-    nextRelease: { version: '1.0.0', gitTag: 'v1.0.0' }
+    nextRelease: { version: '1.0.0', gitTag: 'v1.0.0' },
+    logger: { log: () => ({}), error: () => ({}) }
   }
   const SENTRY_HOST = 'https://sentry.io'
   const tagsUrl = 'https://myreleases/'
@@ -109,8 +125,12 @@ describe('Publish', () => {
 
   it('Deploy app', async () => {
     ctx.env.SENTRY_PROJECT = 'project'
+    const filePath = tempWrite.sync('sourcemaps', 'dist/app.js.map')
+    const sourcemaps = path.dirname(filePath)
+    ctx.cwd = path.dirname(sourcemaps)
+    const urlPrefix = '~/dist'
     // @ts-ignore
-    const result = await publish({ tagsUrl }, ctx)
+    const result = await publish({ tagsUrl, sourcemaps, urlPrefix }, ctx)
     expect(result.release.version).to.equal('1.0.0')
   })
 })

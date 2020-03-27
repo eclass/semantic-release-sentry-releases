@@ -28,6 +28,7 @@
   "homepage": "https://github.com/eclass/semantic-release-sentry-releases#readme",
   "dependencies": {
     "@semantic-release/error": "^2.1.0",
+    "@sentry/cli": "1.51.1",
     "aggregate-error": "^3.0.1"
   },
   "devDependencies": {
@@ -37,8 +38,10 @@
     "@eclass/semantic-release-npm-github-config": "3.0.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
+    "@sentry/types": "5.15.0",
     "@types/chai": "4.2.11",
     "@types/mocha": "7.0.2",
+    "@types/mock-require": "2.0.0",
     "@types/node": "12.12.31",
     "@types/semantic-release": "15.13.1",
     "chai": "4.2.0",
@@ -55,11 +58,13 @@
     "husky": "4.2.3",
     "lint-staged": "10.0.9",
     "mocha": "7.1.1",
+    "mock-require": "3.0.3",
     "nock": "12.0.3",
     "nyc": "15.0.0",
     "nyc-config-common": "1.0.1",
     "prettier-standard": "16.2.1",
     "semantic-release": "17.0.4",
+    "temp-write": "4.0.0",
     "typescript": "3.8.3"
   },
   "peerDependencies": {

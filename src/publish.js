@@ -1,3 +1,5 @@
+const path = require('path')
+const SentryCli = require('@sentry/cli')
 const getError = require('./get-error')
 const { createRelease, createDeploy } = require('./request')
 
@@ -25,6 +27,7 @@ const { createRelease, createDeploy } = require('./request')
 module.exports = async (pluginConfig, ctx) => {
   try {
     const url = pluginConfig.tagsUrl || ''
+    const project = ctx.env.SENTRY_PROJECT || pluginConfig.project
     /** @type {SentryReleaseParams} */
     const releaseDate = {
       commits: ctx.commits.map(commit => {
@@ -41,15 +44,30 @@ module.exports = async (pluginConfig, ctx) => {
         return newCommit
       }),
       version: ctx.nextRelease.version,
-      projects: [ctx.env.SENTRY_PROJECT || pluginConfig.project]
+      projects: [project]
     }
-    if (url !== '') releaseDate.url = url
+    if (url !== '') releaseDate.url = `${url}/v${ctx.nextRelease.version}`
     const org = ctx.env.SENTRY_ORG || pluginConfig.org
+    ctx.logger.log('Creating release %s', ctx.nextRelease.version)
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
       org
     )
+    ctx.logger.log('Release created')
+    process.env.SENTRY_ORG = org
+    process.env.SENTRY_PROJECT = project
+    const cli = new SentryCli()
+    if (pluginConfig.sourcemaps && pluginConfig.urlPrefix) {
+      const sourcemaps = path.resolve(ctx.cwd, pluginConfig.sourcemaps)
+      ctx.logger.log('Uploading sourcemaps from %s', sourcemaps)
+      await cli.releases.uploadSourceMaps(ctx.nextRelease.version, {
+        include: [sourcemaps],
+        urlPrefix: pluginConfig.urlPrefix,
+        rewrite: pluginConfig.rewrite || false
+      })
+      ctx.logger.log('Sourcemaps uploaded')
+    }
     /** @type {SentryDeployParams} */
     const deployData = {
       environment: pluginConfig.environment || 'production'
@@ -58,7 +76,7 @@ module.exports = async (pluginConfig, ctx) => {
       deployData.name = pluginConfig.deployName
     }
     if (pluginConfig.deployUrl) {
-      deployData.name = pluginConfig.deployUrl
+      deployData.url = pluginConfig.deployUrl
     }
     if (ctx.env.DEPLOY_START) {
       deployData.dateStarted = ctx.env.DEPLOY_START
@@ -66,14 +84,17 @@ module.exports = async (pluginConfig, ctx) => {
     if (ctx.env.DEPLOY_END) {
       deployData.dateStarted = ctx.env.DEPLOY_END
     }
+    ctx.logger.log('Creating deploy for release %s', ctx.nextRelease.version)
     const deploy = await createDeploy(
       deployData,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
       ctx.nextRelease.version
     )
+    ctx.logger.log('Deploy created')
     return { release, deploy }
   } catch (err) {
+    ctx.logger.error(err)
     throw getError('ESENTRYDEPLOY', ctx)
   }
 }
