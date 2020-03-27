@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.2.0...v2.3.0) (2020-03-27)
+
+
+### Features
+
+* **publish:** enable upload sourcemaps ([f63fa5d](https://github.com/eclass/semantic-release-sentry-releases/commit/f63fa5d63909c557c9ee3ecf01359d010ad06210)), closes [#80](https://github.com/eclass/semantic-release-sentry-releases/issues/80)
+
 # [2.2.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.1.0...v2.2.0) (2020-03-24)
 
 
