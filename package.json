@@ -63,7 +63,7 @@
     "nyc": "15.0.1",
     "nyc-config-common": "1.0.1",
     "prettier-standard": "16.2.1",
-    "semantic-release": "17.0.6",
+    "semantic-release": "17.0.7",
     "temp-write": "4.0.0",
     "typescript": "3.8.3"
   },
