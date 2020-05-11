@@ -71,7 +71,10 @@
     "semantic-release": ">=11.0.0 <18.0.0"
   },
   "eslintConfig": {
-    "extends": "@eclass"
+    "extends": "@eclass",
+    "rules": {
+      "sonarjs/cognitive-complexity": ["error", 16]
+    }
   },
   "eslintIgnore": [
     "coverage"
