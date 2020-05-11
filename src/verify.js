@@ -23,6 +23,10 @@ module.exports = async (pluginConfig, ctx) => {
     if (!org) {
       errors.push(getError('ENOSENTRYORG', ctx))
     }
+    const hostname = ctx.env.SENTRY_HOSTNAME || pluginConfig.org || 'sentry.io'
+    if (!hostname) {
+      errors.push(getError('ENOSENTRYHOSTNAME', ctx))
+    }
     if (!ctx.env.SENTRY_PROJECT && !pluginConfig.project) {
       errors.push(getError('ENOSENTRYPROJECT', ctx))
     }
@@ -32,7 +36,7 @@ module.exports = async (pluginConfig, ctx) => {
     if (errors.length > 0) {
       throw new AggregateError(errors)
     }
-    return await verify(ctx.env.SENTRY_AUTH_TOKEN, org)
+    return await verify(ctx.env.SENTRY_AUTH_TOKEN, org, hostname)
   } catch (err) {
     if (err instanceof AggregateError) {
       throw err

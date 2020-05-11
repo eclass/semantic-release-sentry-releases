@@ -47,15 +47,18 @@ module.exports = async (pluginConfig, ctx) => {
       projects: [project]
     }
     if (url !== '') releaseDate.url = `${url}/v${ctx.nextRelease.version}`
-    const org = ctx.env.SENTRY_ORG || pluginConfig.org
+    const org = ctx.env.SENTRY_ORG || pluginConfig.org || 'sentry.io'
+    const hostname = ctx.env.SENTRY_HOSTNAME || pluginConfig.hostname
     ctx.logger.log('Creating release %s', ctx.nextRelease.version)
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
-      org
+      org,
+      hostname
     )
     ctx.logger.log('Release created')
     process.env.SENTRY_ORG = org
+    process.env.SENTRY_HOSTNAME = hostname
     process.env.SENTRY_PROJECT = project
     const cli = new SentryCli()
     if (pluginConfig.sourcemaps && pluginConfig.urlPrefix) {
@@ -89,6 +92,7 @@ module.exports = async (pluginConfig, ctx) => {
       deployData,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
+      hostname,
       ctx.nextRelease.version
     )
     ctx.logger.log('Deploy created')

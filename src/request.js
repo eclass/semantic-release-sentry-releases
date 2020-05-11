@@ -79,15 +79,16 @@ const TYPES = {
  * @param {string} path -
  * @param {*} data -
  * @param {string} token -
+ * @param {string} hostname -
  * @returns {Promise<*>} -
  * @example
  * await request(path, data, token)
  */
-const request = (path, data, token) =>
+const request = (path, data, token, hostname) =>
   new Promise((resolve, reject) => {
     const postData = JSON.stringify(data)
     const options = {
-      hostname: 'sentry.io',
+      hostname: hostname || 'sentry.io',
       path,
       method: 'POST',
       headers: {
@@ -124,42 +125,46 @@ const request = (path, data, token) =>
  * @param {SentryReleaseParams} data -
  * @param {string} token -
  * @param {string} org -
+ * @param {string} hostname -
  * @returns {Promise<SentryReleaseSuccessResponse>} -
  * @example
  * await createRelease(data, token, org)
  */
-const createRelease = (data, token, org) => {
-  return request(`/api/0/organizations/${org}/releases/`, data, token)
+const createRelease = (data, token, org, hostname) => {
+  return request(`/api/0/organizations/${org}/releases/`, data, token, hostname)
 }
 
 /**
  * @param {SentryDeployParams} data -
  * @param {string} token -
  * @param {string} org -
+ * @param {string} hostname -
  * @param {string} version -
  * @returns {Promise<SentryDeploySuccessResponse>} -
  * @example
  * await createDeploy(data, token, org, version)
  */
-const createDeploy = (data, token, org, version) => {
+const createDeploy = (data, token, org, hostname, version) => {
   return request(
     `/api/0/organizations/${org}/releases/${version}/deploys/`,
     data,
-    token
+    token,
+    hostname
   )
 }
 
 /**
  * @param {string} token -
  * @param {string} org -
+ * @param {string} hostname -
  * @returns {Promise<*>} -
  * @example
  * await verify(data, token, org)
  */
-const verify = (token, org) =>
+const verify = (token, org, hostname) =>
   new Promise((resolve, reject) => {
     const options = {
-      hostname: 'sentry.io',
+      hostname: hostname || 'sentry.io',
       path: `/api/0/organizations/${org}/`,
       method: 'GET',
       headers: {
