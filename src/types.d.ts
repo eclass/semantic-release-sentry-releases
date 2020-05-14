@@ -1,11 +1,12 @@
 import {
   Config as SemanticReleaseConfig,
   Context as SemanticReleaseContext,
-  Result as SemanticReleaseResult
+  Result as SemanticReleaseResult,
+  Commit
 } from 'semantic-release'
 
 export interface Context extends SemanticReleaseContext, SemanticReleaseConfig, SemanticReleaseResult {
-  commits?: SemanticRelease.Commit[]
+  commits?: Commit[]
 }
 
 export interface Config {
