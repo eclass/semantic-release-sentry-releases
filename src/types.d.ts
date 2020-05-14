@@ -18,6 +18,7 @@ export interface Config {
   deployName?: string
   deployUrl?: string
   org?: string
+  url?: string
   project?: string
   sourcemaps?: string
   urlPrefix?: string

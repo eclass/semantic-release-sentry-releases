@@ -44,9 +44,10 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 | Variable             | Description                                                       |
 | -------------------- | ----------------------------------------------------------------- |
-| `SENTRY_AUTH_TOKEN` | Sentry token created in [profile](https://docs.sentry.io/api/auth/#id1) |
-| `SENTRY_ORG` | Sentry organization name |
-| `SENTRY_PROJECT` | Sentry project name |
+| `SENTRY_AUTH_TOKEN` | The authentication token created in [profile](https://docs.sentry.io/api/auth/#id1) |
+| `SENTRY_ORG` | The slug of the organization. |
+| `SENTRY_PROJECT` | The slug of the project. |
+| `SENTRY_URL` | The URL to use to connect to sentry. This defaults to https://sentry.io/. |
 | `DEPLOY_START` | Sentry deploy start timestamp. Optional for deploy |
 | `DEPLOY_END` | Sentry deploy end timestamp. Optional for deploy |
 
@@ -54,8 +55,9 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 | Variable  | Description                                                       |
 | --------- | ----------------------------------------------------------------- |
-| `project` | Sentry project name. Optional. Required if not present in environment variables |
-| `org` | Sentry organization name. Optional. Required if not present in environment variables |
+| `project` | The slug of the project. Optional. Required if not present in environment variables |
+| `org` | The slug of the organization. Optional. Required if not present in environment variables |
+| `url` | The URL to use to connect to sentry. Optional to set an on-premise instance |
 | `repositoryUrl` | A valid url for add link to commits of new release. Optional. Ex: https://github.com/owner/repo |
 | `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
 | `environment` | Sentry environment. Optional for deploy. Default production |

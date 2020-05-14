@@ -122,10 +122,26 @@ describe('Verify', () => {
     }
   })
 
+  it('Return SemanticReleaseError if a SENTRY_URL environment variable is invalid', async () => {
+    try {
+      env.SENTRY_AUTH_TOKEN = 'valid'
+      env.SENTRY_ORG = 'valid'
+      env.SENTRY_PROJECT = 'project'
+      env.SENTRY_URL = 'invalid'
+      // @ts-ignore
+      await verify({}, { env })
+    } catch (errs) {
+      const err = errs._errors[0]
+      expect(err.name).to.equal('SemanticReleaseError')
+      expect(err.code).to.equal('EINVALIDSENTRYURL')
+    }
+  })
+
   it('Verify alias from a custom environmen variable', async () => {
     env.SENTRY_AUTH_TOKEN = 'valid'
     env.SENTRY_ORG = 'valid'
     env.SENTRY_PROJECT = 'project'
+    env.SENTRY_URL = SENTRY_HOST
     // @ts-ignore
     expect(await verify({}, { env })).to.be.a('undefined')
   })

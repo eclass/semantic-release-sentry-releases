@@ -77,6 +77,19 @@ Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id
     })
   ],
   [
+    'EINVALIDSENTRYURL',
+    /**
+     * @param {Context} ctx -
+     * @returns {SemanticReleaseError} -
+     */
+    ctx => ({
+      message: 'Invalid sentry url.',
+      details: `The [url option](${linkify(
+        'README.md#options'
+      )}), if defined, must be a valid url.`
+    })
+  ],
+  [
     'EINVALIDSENTRYTOKEN',
     /**
      * @param {Context} ctx -

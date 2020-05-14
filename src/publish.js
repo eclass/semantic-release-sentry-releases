@@ -17,6 +17,33 @@ const { createRelease, createDeploy } = require('./request')
  * @property {SentryReleaseSuccessResponse} release
  * @property {SentryDeploySuccessResponse} deploy
  */
+
+/**
+ * @param {Config} pluginConfig -
+ * @param {Context} ctx -
+ * @returns {SentryDeployParams} -
+ * @example
+ * getDeployData(pluginConfig, ctx)
+ */
+const getDeployData = (pluginConfig, ctx) => {
+  /** @type {SentryDeployParams} */
+  const deployData = {
+    environment: pluginConfig.environment || 'production'
+  }
+  if (pluginConfig.deployName) {
+    deployData.name = pluginConfig.deployName
+  }
+  if (pluginConfig.deployUrl) {
+    deployData.url = pluginConfig.deployUrl
+  }
+  if (ctx.env.DEPLOY_START) {
+    deployData.dateStarted = ctx.env.DEPLOY_START
+  }
+  if (ctx.env.DEPLOY_END) {
+    deployData.dateStarted = ctx.env.DEPLOY_END
+  }
+  return deployData
+}
 /**
  * @param {Config} pluginConfig -
  * @param {Context} ctx -
@@ -26,7 +53,7 @@ const { createRelease, createDeploy } = require('./request')
  */
 module.exports = async (pluginConfig, ctx) => {
   try {
-    const url = pluginConfig.tagsUrl || ''
+    const tagsUrl = pluginConfig.tagsUrl || ''
     const project = ctx.env.SENTRY_PROJECT || pluginConfig.project
     /** @type {SentryReleaseParams} */
     const releaseDate = {
@@ -46,16 +73,21 @@ module.exports = async (pluginConfig, ctx) => {
       version: ctx.nextRelease.version,
       projects: [project]
     }
-    if (url !== '') releaseDate.url = `${url}/v${ctx.nextRelease.version}`
+    if (tagsUrl !== '') {
+      releaseDate.url = `${tagsUrl}/v${ctx.nextRelease.version}`
+    }
     const org = ctx.env.SENTRY_ORG || pluginConfig.org
+    const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
     ctx.logger.log('Creating release %s', ctx.nextRelease.version)
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
-      org
+      org,
+      url
     )
     ctx.logger.log('Release created')
     process.env.SENTRY_ORG = org
+    process.env.SENTRY_URL = url
     process.env.SENTRY_PROJECT = project
     const cli = new SentryCli()
     if (pluginConfig.sourcemaps && pluginConfig.urlPrefix) {
@@ -68,27 +100,13 @@ module.exports = async (pluginConfig, ctx) => {
       })
       ctx.logger.log('Sourcemaps uploaded')
     }
-    /** @type {SentryDeployParams} */
-    const deployData = {
-      environment: pluginConfig.environment || 'production'
-    }
-    if (pluginConfig.deployName) {
-      deployData.name = pluginConfig.deployName
-    }
-    if (pluginConfig.deployUrl) {
-      deployData.url = pluginConfig.deployUrl
-    }
-    if (ctx.env.DEPLOY_START) {
-      deployData.dateStarted = ctx.env.DEPLOY_START
-    }
-    if (ctx.env.DEPLOY_END) {
-      deployData.dateStarted = ctx.env.DEPLOY_END
-    }
+    const deployData = getDeployData(pluginConfig, ctx)
     ctx.logger.log('Creating deploy for release %s', ctx.nextRelease.version)
     const deploy = await createDeploy(
       deployData,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
+      url,
       ctx.nextRelease.version
     )
     ctx.logger.log('Deploy created')
