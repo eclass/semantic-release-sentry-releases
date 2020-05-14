@@ -49,6 +49,7 @@ const TYPES = {
  */
 /**
  * @typedef {Object} SentryReleaseCommit
+ * @property {string} id -
  * @property {string} [repository] -
  * @property {string} [message] -
  * @property {Array<SentryReleasePatchSet>} [patch_set] -
