@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.3.3...v2.4.0) (2020-05-14)
+
+
+### Features
+
+* allow use of custom hostname ([057d5b0](https://github.com/eclass/semantic-release-sentry-releases/commit/057d5b0db0999ce6fc15038502031f051e618d68)), closes [#149](https://github.com/eclass/semantic-release-sentry-releases/issues/149)
+
 ## [2.3.3](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.3.2...v2.3.3) (2020-04-22)
 
 
