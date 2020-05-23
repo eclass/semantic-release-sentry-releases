@@ -45,7 +45,7 @@
     "@types/node": "12.12.42",
     "@types/semantic-release": "17.0.1",
     "chai": "4.2.0",
-    "eslint": "7.0.0",
+    "eslint": "7.1.0",
     "eslint-plugin-array-func": "3.1.6",
     "eslint-plugin-eslint-comments": "3.1.2",
     "eslint-plugin-import": "2.20.2",
