@@ -28,7 +28,7 @@
   "homepage": "https://github.com/eclass/semantic-release-sentry-releases#readme",
   "dependencies": {
     "@semantic-release/error": "^2.1.0",
-    "@sentry/cli": "1.53.0",
+    "@sentry/cli": "1.54.0",
     "aggregate-error": "^3.0.1"
   },
   "devDependencies": {
