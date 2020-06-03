@@ -1,6 +1,6 @@
 {
   "name": "@eclass/semantic-release-sentry-releases",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "semantic-release plugin to create releases in sentry",
   "main": "src/index.js",
   "scripts": {
