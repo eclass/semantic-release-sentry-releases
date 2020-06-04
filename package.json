@@ -65,7 +65,7 @@
     "prettier-standard": "16.3.0",
     "semantic-release": "17.0.8",
     "temp-write": "4.0.0",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   },
   "peerDependencies": {
     "semantic-release": ">=11.0.0 <18.0.0"
