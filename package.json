@@ -42,7 +42,7 @@
     "@types/chai": "4.2.11",
     "@types/mocha": "7.0.2",
     "@types/mock-require": "2.0.0",
-    "@types/node": "12.12.43",
+    "@types/node": "12.12.44",
     "@types/semantic-release": "17.0.1",
     "chai": "4.2.0",
     "eslint": "7.1.0",
