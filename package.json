@@ -59,7 +59,7 @@
     "lint-staged": "10.2.11",
     "mocha": "8.1.1",
     "mock-require": "3.0.3",
-    "nock": "13.0.3",
+    "nock": "13.0.4",
     "nyc": "15.1.0",
     "nyc-config-common": "1.0.1",
     "prettier-standard": "16.4.1",
