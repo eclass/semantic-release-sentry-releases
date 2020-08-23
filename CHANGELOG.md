@@ -1,3 +1,10 @@
+## [2.4.6](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.5...v2.4.6) (2020-08-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sentry/cli to v1.55.2 ([fd67f9a](https://github.com/eclass/semantic-release-sentry-releases/commit/fd67f9acdfd6ef42cc2c05d24d3266ea1da02a6a))
+
 ## [2.4.5](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.4...v2.4.5) (2020-07-27)
 
 
