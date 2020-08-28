@@ -6,16 +6,9 @@ const { createRelease, createDeploy } = require('./request')
 /**
  * @typedef {import('./types').Context} Context
  * @typedef {import('./types').Config} Config
- * @typedef {import('semantic-release').Commit} Commit
- * @typedef {import('./request').SentryReleaseParams} SentryReleaseParams
- * @typedef {import('./request').SentryDeployParams} SentryDeployParams
- * @typedef {import('./request').SentryReleaseSuccessResponse} SentryReleaseSuccessResponse
- * @typedef {import('./request').SentryDeploySuccessResponse} SentryDeploySuccessResponse
- */
-/**
- * @typedef {Object} PublishResult
- * @property {SentryReleaseSuccessResponse} release
- * @property {SentryDeploySuccessResponse} deploy
+ * @typedef {import('./types').PublishResult} PublishResult
+ * @typedef {import('./types').SentryReleaseParams} SentryReleaseParams
+ * @typedef {import('./types').SentryDeployParams} SentryDeployParams
  */
 
 /**

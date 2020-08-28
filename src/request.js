@@ -3,81 +3,13 @@ const http = require('http')
 const { URL } = require('url')
 const getError = require('./get-error')
 
-/** @typedef {string} PatchSetType */
-/** @enum {PatchSetType} */
-// eslint-disable-next-line no-unused-vars
-const TYPES = {
-  ADD: 'A',
-  MODIFY: 'M',
-  DELETE: 'D'
-}
-/** @typedef {import('./types').Context} Context */
 /**
- * @typedef {Object} SentryProject
- * @property {string} name -
- * @property {string} slug -
- */
-/**
- * @typedef {Object} SentryReleaseSuccessResponse
- * @property {Array<*>} authors -
- * @property {number} commitCount -
- * @property {*} data -
- * @property {string} dateCreated -
- * @property {string} [dateReleased] -
- * @property {number} deployCount -
- * @property {string} [firstEvent] -
- * @property {string} [lastCommit] -
- * @property {string} [lastDeploy] -
- * @property {string} [lastEvent] -
- * @property {number} newGroups -
- * @property {string} [owner] -
- * @property {Array<SentryProject>} projects -
- * @property {string} ref -
- * @property {string} shortVersion -
- * @property {string} [url] -
- * @property {string} version -
- */
-/**
- * @typedef {Object} SentryDeploySuccessResponse
- * @property {string} id -
- * @property {string} name -
- * @property {string} url -
- * @property {string} environment -
- * @property {string} dateStarted -
- * @property {string} dateFinished -
- */
-/**
- * @typedef {Object} SentryReleasePatchSet
- * @property {string} path -
- * @property {PatchSetType} type -
- */
-/**
- * @typedef {Object} SentryReleaseCommit
- * @property {string} id -
- * @property {string} [repository] -
- * @property {string} [message] -
- * @property {Array<SentryReleasePatchSet>} [patch_set] -
- * @property {string} [author_name] -
- * @property {string} [author_email] -
- * @property {string} [timestamp] -
- */
-/**
- * @typedef {Object} SentryReleaseParams
- * @property {string} version -
- * @property {string} [ref] -
- * @property {string} [url] -
- * @property {Array<string>} projects -
- * @property {Date} [dateReleased] -
- * @property {Array<SentryReleaseCommit>} [commits] -
- * @property {Array<string>} [refs] -
- */
-/**
- * @typedef {Object} SentryDeployParams
- * @property {string} environment -
- * @property {string} [name] -
- * @property {string} [url] -
- * @property {string} [dateStarted] -
- * @property {string} [dateFinished] -
+ * @typedef {import('./types').Context} Context
+ * @typedef {import('./types').SentryDeployParams} SentryDeployParams
+ * @typedef {import('./types').SentryDeploySuccessResponse} SentryDeploySuccessResponse
+ * @typedef {import('./types').SentryReleaseParams} SentryReleaseParams
+ * @typedef {import('./types').SentryReleaseSuccessResponse} SentryReleaseSuccessResponse
+ * @typedef {import('./types').PATCH_SET_TYPES} PATCH_SET_TYPES
  */
 
 /**
