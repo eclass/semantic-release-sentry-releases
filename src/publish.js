@@ -1,6 +1,7 @@
 const path = require('path')
 const SentryCli = require('@sentry/cli')
 const getError = require('./get-error')
+const parseCommits = require('./parse-commits')
 const { createRelease, createDeploy } = require('./request')
 
 /**
@@ -37,6 +38,7 @@ const getDeployData = (pluginConfig, ctx) => {
   }
   return deployData
 }
+
 /**
  * @param {Config} pluginConfig -
  * @param {Context} ctx -
@@ -48,21 +50,12 @@ module.exports = async (pluginConfig, ctx) => {
   try {
     const tagsUrl = pluginConfig.tagsUrl || ''
     const project = ctx.env.SENTRY_PROJECT || pluginConfig.project
+    ctx.logger.log('Retrieving commits data')
+    const commits = await parseCommits(pluginConfig, ctx)
+    ctx.logger.log('Commit data retrieved')
     /** @type {SentryReleaseParams} */
     const releaseDate = {
-      commits: ctx.commits.map(commit => {
-        const newCommit = {
-          id: commit.hash,
-          message: commit.message,
-          author_name: commit.author.name,
-          author_email: commit.author.email,
-          timestamp: commit.committerDate
-        }
-        if (pluginConfig.repositoryUrl) {
-          newCommit.repository = pluginConfig.repositoryUrl
-        }
-        return newCommit
-      }),
+      commits,
       version: ctx.nextRelease.version,
       projects: [project]
     }

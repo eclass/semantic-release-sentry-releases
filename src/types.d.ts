@@ -31,6 +31,13 @@ export enum PATCH_SET_TYPES {
   MODIFY = 'M',
   DELETE = 'D'
 }
+
+export enum GIT_DIFF_TREE_TYPES {
+  RAW_DATA = 'RAW DATA',
+  PATCH_DATA = 'PATCH DATA',
+  FILE_STATS = 'FILE STATS',
+  NO_SHOW = 'noshow'
+}
 export interface SentryProject {
   name: string
   slug: string

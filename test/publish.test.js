@@ -1,3 +1,4 @@
+const { EventEmitter } = require('events')
 const path = require('path')
 const { describe, it, beforeEach } = require('mocha')
 const { expect } = require('chai')
@@ -15,6 +16,17 @@ class SentryCliMock {
   }
 }
 mock('@sentry/cli', SentryCliMock)
+
+// eslint-disable-next-line require-jsdoc
+const gitDiffTree = (repoPath, options) => {
+  const event = new EventEmitter()
+  setTimeout(() => {
+    event.emit('data', 'raw', { toFile: 'index.js', status: 'A' })
+    event.emit('end')
+  }, 200)
+  return event
+}
+mock('git-diff-tree', gitDiffTree)
 
 const publish = require('../src/publish')
 

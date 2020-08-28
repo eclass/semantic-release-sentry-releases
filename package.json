@@ -29,7 +29,8 @@
   "dependencies": {
     "@semantic-release/error": "^2.1.0",
     "@sentry/cli": "^1.55.2",
-    "aggregate-error": "^3.1.0"
+    "aggregate-error": "^3.1.0",
+    "git-diff-tree": "^1.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "10.0.0",
