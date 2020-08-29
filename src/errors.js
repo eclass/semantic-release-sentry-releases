@@ -96,10 +96,27 @@ Please make sure to create an [sentry token](https://docs.sentry.io/api/auth/#id
      * @returns {SemanticReleaseError} -
      */
     ctx => ({
-      message: 'Invalid sentry token.',
+      message: ctx.message || 'Invalid token.',
       details: `The [sentry token](${linkify(
         'README.md#environment-variables'
-      )}) configured in the \`SENTRY_AUTH_TOKEN\` environment variable must be a valid [token](https://docs.sentry.io/api/auth/#id1) allowing to create releases to org \`${
+      )}) configured in the \`SENTRY_AUTH_TOKEN\` environment variable must be a valid [token](https://docs.sentry.io/api/auth/#id1) allowing to list and create releases to org \`${
+        ctx.env.SENTRY_ORG
+      }\`.
+Please make sure to set the \`SENTRY_AUTH_TOKEN\` environment variable in your CI with the exact value of the sentry token.`
+    })
+  ],
+  [
+    'EPERMISSIONSSENTRYTOKEN',
+    /**
+     * @param {Context} ctx -
+     * @returns {SemanticReleaseError} -
+     */
+    ctx => ({
+      message:
+        ctx.message || 'You do not have permission to perform this action.',
+      details: `The [sentry token](${linkify(
+        'README.md#environment-variables'
+      )}) configured in the \`SENTRY_AUTH_TOKEN\` environment variable must be [token](https://docs.sentry.io/api/auth/#id1) with permissions to list and create releases to org \`${
         ctx.env.SENTRY_ORG
       }\`.
 Please make sure to set the \`SENTRY_AUTH_TOKEN\` environment variable in your CI with the exact value of the sentry token.`
@@ -112,7 +129,7 @@ Please make sure to set the \`SENTRY_AUTH_TOKEN\` environment variable in your C
      * @returns {SemanticReleaseError} -
      */
     ctx => ({
-      message: 'Invalid sentry org.',
+      message: ctx.message || 'The requested resource does not exist.',
       details: `The [sentry org](${linkify(
         'README.md#environment-variables'
       )}) configured in the \`SENTRY_ORG\` environment variable must be a valid org slug. Current org is \`${

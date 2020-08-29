@@ -6,7 +6,8 @@ import {
 } from 'semantic-release'
 
 export interface Context extends SemanticReleaseContext, SemanticReleaseConfig, SemanticReleaseResult {
-  commits?: Commit[]
+  commits?: Commit[],
+  message?: string
 }
 
 export interface Config {

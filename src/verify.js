@@ -1,5 +1,6 @@
 const { URL } = require('url')
 const AggregateError = require('aggregate-error')
+const SemanticReleaseError = require('@semantic-release/error')
 const getError = require('./get-error')
 const { verify } = require('./request')
 
@@ -67,14 +68,10 @@ module.exports = async (pluginConfig, ctx) => {
     if (errors.length > 0) {
       throw new AggregateError(errors)
     }
-    return await verify(ctx.env.SENTRY_AUTH_TOKEN, org, url)
+    return await verify(ctx.env.SENTRY_AUTH_TOKEN, org, url, ctx)
   } catch (err) {
-    if (err instanceof AggregateError) {
+    if (err instanceof AggregateError || err instanceof SemanticReleaseError) {
       throw err
-    } else if (/401/.test(err.message)) {
-      throw getError('EINVALIDSENTRYTOKEN', ctx)
-    } else if (/404/.test(err.message)) {
-      throw getError('EINVALIDSENTRYORG', ctx)
     } else {
       throw getError('ESENTRYDEPLOY', ctx)
     }

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 const { describe, it, beforeEach } = require('mocha')
 const { expect } = require('chai')
 const nock = require('nock')
@@ -11,23 +12,32 @@ describe('Verify', () => {
   beforeEach(() => {
     nock.disableNetConnect()
     nock(SENTRY_HOST)
-      .get('/api/0/organizations/invalid/')
-      .reply(404)
+      .get('/api/0/organizations/invalid/releases/')
+      .reply(404, { detail: 'The requested resource does not exist.' })
     nock(SENTRY_HOST, {
       reqheaders: {
         authorization: 'Bearer invalid'
       }
     })
-      .get('/api/0/organizations/valid/')
-      .reply(401)
+      .get('/api/0/organizations/valid/releases/')
+      .reply(401, { detail: 'Invalid token.' })
+    nock(SENTRY_HOST, {
+      reqheaders: {
+        authorization: 'Bearer without_permissions'
+      }
+    })
+      .get('/api/0/organizations/valid/releases/')
+      .reply(403, {
+        detail: 'You do not have permission to perform this action.'
+      })
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .get('/api/0/organizations/valid/')
-      .reply(200)
+      .get('/api/0/organizations/valid/releases/')
+      .reply(200, [{}])
     nock(SENTRY_HOST, NOCK_OPTIONS)
       .post('/api/0/organizations/valid/releases/')
       .reply(201)
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .get('/api/0/organizations/error/')
+      .get('/api/0/organizations/error/releases/')
       .replyWithError('server error')
   })
 
@@ -122,6 +132,19 @@ describe('Verify', () => {
     }
   })
 
+  it('Return SemanticReleaseError if a SENTRY_AUTH_TOKEN environment variable is invalid', async () => {
+    try {
+      env.SENTRY_AUTH_TOKEN = 'without_permissions'
+      env.SENTRY_ORG = 'valid'
+      env.SENTRY_PROJECT = 'project'
+      // @ts-ignore
+      await verify({}, { env })
+    } catch (err) {
+      expect(err.name).to.equal('SemanticReleaseError')
+      expect(err.code).to.equal('EPERMISSIONSSENTRYTOKEN')
+    }
+  })
+
   it('Return SemanticReleaseError if a SENTRY_URL environment variable is invalid', async () => {
     try {
       env.SENTRY_AUTH_TOKEN = 'valid'
@@ -146,3 +169,4 @@ describe('Verify', () => {
     expect(await verify({}, { env })).to.be.a('undefined')
   })
 })
+/* eslint-enable sonarjs/no-duplicate-string */

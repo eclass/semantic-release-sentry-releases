@@ -1,6 +1,7 @@
 const https = require('https')
 const http = require('http')
 const { URL } = require('url')
+const getError = require('./get-error')
 
 /** @typedef {string} PatchSetType */
 /** @enum {PatchSetType} */
@@ -10,6 +11,7 @@ const TYPES = {
   MODIFY: 'M',
   DELETE: 'D'
 }
+/** @typedef {import('./types').Context} Context */
 /**
  * @typedef {Object} SentryProject
  * @property {string} name -
@@ -162,16 +164,17 @@ const createDeploy = (data, token, org, url, version) => {
  * @param {string} token -
  * @param {string} org -
  * @param {string} url -
+ * @param {Context} ctx -
  * @returns {Promise<*>} -
  * @example
  * await verify(token, org, url)
  */
-const verify = (token, org, url) =>
+const verify = (token, org, url, ctx) =>
   new Promise((resolve, reject) => {
     const { hostname, protocol } = new URL(url)
     const options = {
       hostname,
-      path: `/api/0/organizations/${org}/`,
+      path: `/api/0/organizations/${org}/releases/`,
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -180,10 +183,33 @@ const verify = (token, org, url) =>
     }
     const client = protocol === 'http:' ? http : https
     const req = client.request(options, res => {
-      if (res.statusCode !== 200) {
-        return reject(new Error(`Invalid status code: ${res.statusCode}`))
-      }
-      resolve()
+      /** @type {Array<Buffer>} */
+      const chunks = []
+      let totalLength = 0
+      res.on('data', (/** @type {Buffer} */ chunk) => {
+        chunks.push(chunk)
+        totalLength += chunk.length
+      })
+      res.on('end', () => {
+        try {
+          const raw = Buffer.concat(chunks, totalLength).toString()
+          const body = JSON.parse(raw || '{}')
+          ctx.message = body.detail
+          if (res.statusCode === 200) {
+            resolve()
+          } else if (res.statusCode === 401) {
+            reject(getError('EINVALIDSENTRYTOKEN', ctx))
+          } else if (res.statusCode === 403) {
+            reject(getError('EPERMISSIONSSENTRYTOKEN', ctx))
+          } else if (res.statusCode === 404) {
+            reject(getError('EINVALIDSENTRYORG', ctx))
+          } else {
+            reject(new Error(`Invalid status code: ${res.statusCode}`))
+          }
+        } catch (err) {
+          reject(err)
+        }
+      })
     })
     req.on('error', err => reject(err))
     req.end()
