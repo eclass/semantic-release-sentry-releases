@@ -1,3 +1,10 @@
+## [2.4.7](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.6...v2.4.7) (2020-08-29)
+
+
+### Bug Fixes
+
+* **verify:** verify token and org with only release permission ([f5bac32](https://github.com/eclass/semantic-release-sentry-releases/commit/f5bac324da46ded84746bb2078f5cc688526b3b1)), closes [#144](https://github.com/eclass/semantic-release-sentry-releases/issues/144)
+
 ## [2.4.6](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.5...v2.4.6) (2020-08-23)
 
 
