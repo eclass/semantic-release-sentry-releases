@@ -2,6 +2,6 @@
   "extends": "nyc-config-common",
   "branches": 70,
   "lines": 80,
-  "functions": 100,
+  "functions": 90,
   "statements": 80
 }
