@@ -32,8 +32,8 @@
     "aggregate-error": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "9.1.2",
-    "@commitlint/config-conventional": "9.1.2",
+    "@commitlint/cli": "10.0.0",
+    "@commitlint/config-conventional": "10.0.0",
     "@eclass/eslint-config": "2.0.0",
     "@eclass/semantic-release-npm-github-config": "3.0.1",
     "@semantic-release/changelog": "5.0.1",
