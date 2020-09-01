@@ -1,3 +1,10 @@
+## [2.4.8](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.7...v2.4.8) (2020-09-01)
+
+
+### Bug Fixes
+
+* **deps:** update aggregate-error to 3.1.0 ([31c2a4e](https://github.com/eclass/semantic-release-sentry-releases/commit/31c2a4e18a2facc05d1be54fda9e4a40cd50fef1))
+
 ## [2.4.7](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.6...v2.4.7) (2020-08-29)
 
 
