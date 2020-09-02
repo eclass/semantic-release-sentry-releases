@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.8...v2.5.0) (2020-09-02)
+
+
+### Features
+
+* enable using the package.json repo url as the repositoryUrl for sentry ([d094c5b](https://github.com/eclass/semantic-release-sentry-releases/commit/d094c5beb9ee71920a2cfda83c89b976cdf9a37b))
+
 ## [2.4.8](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.7...v2.4.8) (2020-09-01)
 
 
