@@ -59,6 +59,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 | `org` | The slug of the organization. Optional. Required if not present in environment variables |
 | `url` | The URL to use to connect to sentry. Optional to set an on-premise instance |
 | `repositoryUrl` | A valid repository name for add link to commits of new release. Optional. Ex: 'myorg / myapp' |
+| `usePackageRepositoryUrl` | If set to `true`, the repository defined in the `package.json` is used.  |
 | `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
 | `environment` | Sentry environment. Optional for deploy. Default production |
 | `deployName` | Deploy name. Optional for deploy |

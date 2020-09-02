@@ -67,6 +67,12 @@ module.exports = async (pluginConfig, ctx) => {
         }
         if (pluginConfig.repositoryUrl) {
           newCommit.repository = pluginConfig.repositoryUrl
+        } else if (
+          !pluginConfig.repositoryUrl &&
+          pluginConfig.usePackageRepositoryUrl === true &&
+          ctx.options.repositoryUrl
+        ) {
+          newCommit.repository = ctx.options.repositoryUrl
         }
         return newCommit
       }),
