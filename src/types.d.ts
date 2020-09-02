@@ -13,7 +13,6 @@ export interface Context extends SemanticReleaseContext, SemanticReleaseConfig, 
 export interface Config {
   // Set url of repository tags. Ex: https://gitlab.com/my-org/my-repo
   repositoryUrl?: string
-  usePackageRepositoryUrl?: boolean
   // Set url of repository tags. Ex: https://gitlab.com/my-org/my-repo/-/tags
   tagsUrl?: string
   environment?: string
