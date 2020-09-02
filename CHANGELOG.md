@@ -1,3 +1,15 @@
+# [2.6.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.5.0...v2.6.0) (2020-09-02)
+
+
+### Features
+
+* **publish:** add path_set to commits in new release ([0029c65](https://github.com/eclass/semantic-release-sentry-releases/commit/0029c6574b9c8f118a585f486ec4c7e1d5118f96)), closes [#134](https://github.com/eclass/semantic-release-sentry-releases/issues/134)
+
+
+### Reverts
+
+* Revert "feat: enable using the package.json repo url as the repositoryUrl for sentry" ([17c14af](https://github.com/eclass/semantic-release-sentry-releases/commit/17c14afa7c37dfa6edc4a88215b5601c1ea4e445))
+
 # [2.5.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.4.8...v2.5.0) (2020-09-02)
 
 
