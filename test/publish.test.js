@@ -31,6 +31,7 @@ mock('git-diff-tree', gitDiffTree)
 const publish = require('../src/publish')
 
 describe('Publish', () => {
+  /** @type {import('../src/types').Context} */
   const ctx = {
     env: {
       SENTRY_ORG: 'valid',
@@ -41,12 +42,30 @@ describe('Publish', () => {
       {
         hash: 'bb3dedcb1fbbd8ffa8fc75d082ea91340a4c7aa7',
         message: 'fix(js): fix request',
-        author: { name: 'me', email: 'me@me.me' },
-        committerDate: new Date().toISOString()
+        author: { name: 'me', email: 'me@me.me', short: '' },
+        committerDate: new Date().toISOString(),
+        commit: { long: '', short: '' },
+        tree: { long: '', short: '' },
+        body: '',
+        committer: { name: 'me', email: 'me@me.me', short: '' },
+        subject: ''
       }
     ],
-    nextRelease: { version: '1.0.0', gitTag: 'v1.0.0' },
-    logger: { log: () => ({}), error: () => ({}) }
+    nextRelease: {
+      version: '1.0.0',
+      gitTag: 'v1.0.0',
+      type: 'major',
+      gitHead: '',
+      notes: ''
+    },
+    logger: { log: () => ({}), error: () => ({}) },
+    options: {
+      repositoryUrl:
+        'https://github.com/eclass/semantic-release-sentry-releases.git',
+      branches: '',
+      plugins: [],
+      tagFormat: ''
+    }
   }
   const SENTRY_HOST = 'https://sentry.io'
   const tagsUrl = 'https://myreleases/'
