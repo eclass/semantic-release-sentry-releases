@@ -1,3 +1,11 @@
+## [2.6.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.6.0...v2.6.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* **publish:** filter path_set with type R ([1c58a4d](https://github.com/eclass/semantic-release-sentry-releases/commit/1c58a4d07a72afd386e6839feda1b467e1f4ef62)), closes [#277](https://github.com/eclass/semantic-release-sentry-releases/issues/277)
+* **publish:** set default repository from ctx.options.repositoryUrl ([7481aad](https://github.com/eclass/semantic-release-sentry-releases/commit/7481aad0728b2e23004c7a58cda3b0eb9653a6bc)), closes [#270](https://github.com/eclass/semantic-release-sentry-releases/issues/270)
+
 # [2.6.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.5.0...v2.6.0) (2020-09-02)
 
 
