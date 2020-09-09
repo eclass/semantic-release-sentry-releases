@@ -29,7 +29,8 @@ export interface Config {
 export enum PATCH_SET_TYPES {
   ADD = 'A',
   MODIFY = 'M',
-  DELETE = 'D'
+  DELETE = 'D',
+  RENAME = 'R'
 }
 
 export enum GIT_DIFF_TREE_TYPES {

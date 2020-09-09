@@ -13,6 +13,13 @@ const GIT_DIFF_TREE_TYPES = {
   FILE_STATS: 'stats',
   NO_SHOW: 'noshow'
 }
+
+const PATCH_SET_TYPES = {
+  ADD: 'A',
+  MODIFY: 'M',
+  DELETE: 'D',
+  RENAME: 'R'
+}
 /**
  * @param {string} basedir -
  * @param {string} rev -
@@ -34,7 +41,10 @@ const getCommitPatchSet = (basedir, rev = 'HEAD') => {
          * @param {GitDiffTreeData} data -
          */
         (type, data) => {
-          if (type === GIT_DIFF_TREE_TYPES.RAW_DATA) {
+          if (
+            type === GIT_DIFF_TREE_TYPES.RAW_DATA &&
+            data.status !== PATCH_SET_TYPES.RENAME
+          ) {
             patchSet.push({ path: data.toFile, type: data.status })
           }
         }
