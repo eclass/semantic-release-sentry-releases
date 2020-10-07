@@ -66,6 +66,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 | `sourcemaps` | Directory with sourcemaps. Example `dist`. Optional for upload sourcemaps |
 | `urlPrefix` | URL prefix for sourcemaps. Example `~/dist`. Optional for upload sourcemaps |
 | `rewrite` | Boolean to indicate rewrite sourcemaps. Default `false`. Optional for upload sourcemaps |
+| `releasePrefix`| String that is passed as prefix to the sentry release. <br/> Optional to fix the problem that releases are associated with the organization instead of the project ([Read More](https://github.com/getsentry/sentry-cli/issues/482)). <br/> Ex: `releasePrefix:"web1"` would resolve __only__ the sentry release to `web1-1.0.0`. <br/>__Important Notice:__ when you use this feature you also have to change the release name in your sentry client app. |
 
 ### Examples
 

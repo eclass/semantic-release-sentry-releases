@@ -24,6 +24,7 @@ export interface Config {
   sourcemaps?: string
   urlPrefix?: string
   rewrite?: boolean
+  releasePrefix?: string
 }
 
 export enum PATCH_SET_TYPES {

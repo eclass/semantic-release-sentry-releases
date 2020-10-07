@@ -53,10 +53,13 @@ module.exports = async (pluginConfig, ctx) => {
     ctx.logger.log('Retrieving commits data')
     const commits = await parseCommits(pluginConfig, ctx)
     ctx.logger.log('Commit data retrieved')
+    const sentryReleaseVersion = pluginConfig.releasePrefix
+      ? `${pluginConfig.releasePrefix}-${ctx.nextRelease.version}`
+      : ctx.nextRelease.version
     /** @type {SentryReleaseParams} */
     const releaseDate = {
       commits,
-      version: ctx.nextRelease.version,
+      version: sentryReleaseVersion,
       projects: [project]
     }
     if (tagsUrl !== '') {
@@ -64,7 +67,7 @@ module.exports = async (pluginConfig, ctx) => {
     }
     const org = ctx.env.SENTRY_ORG || pluginConfig.org
     const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
-    ctx.logger.log('Creating release %s', ctx.nextRelease.version)
+    ctx.logger.log('Creating release %s', sentryReleaseVersion)
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
@@ -79,7 +82,7 @@ module.exports = async (pluginConfig, ctx) => {
     if (pluginConfig.sourcemaps && pluginConfig.urlPrefix) {
       const sourcemaps = path.resolve(ctx.cwd, pluginConfig.sourcemaps)
       ctx.logger.log('Uploading sourcemaps from %s', sourcemaps)
-      await cli.releases.uploadSourceMaps(ctx.nextRelease.version, {
+      await cli.releases.uploadSourceMaps(sentryReleaseVersion, {
         include: [sourcemaps],
         urlPrefix: pluginConfig.urlPrefix,
         rewrite: pluginConfig.rewrite || false
@@ -87,13 +90,13 @@ module.exports = async (pluginConfig, ctx) => {
       ctx.logger.log('Sourcemaps uploaded')
     }
     const deployData = getDeployData(pluginConfig, ctx)
-    ctx.logger.log('Creating deploy for release %s', ctx.nextRelease.version)
+    ctx.logger.log('Creating deploy for release %s', sentryReleaseVersion)
     const deploy = await createDeploy(
       deployData,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
       url,
-      ctx.nextRelease.version
+      sentryReleaseVersion
     )
     ctx.logger.log('Deploy created')
     return { release, deploy }

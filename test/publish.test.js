@@ -120,6 +120,42 @@ describe('Publish', () => {
         dateFinished: '2020-02-05T10:30:43Z',
         id: '5044917'
       })
+
+    nock(SENTRY_HOST, NOCK_OPTIONS)
+      .post(PATH_RELEASE)
+      .reply(201, {
+        authors: [],
+        commitCount: 0,
+        data: {},
+        dateCreated: new Date().toISOString(),
+        dateReleased: null,
+        deployCount: 0,
+        firstEvent: null,
+        lastCommit: null,
+        lastDeploy: null,
+        lastEvent: null,
+        newGroups: 0,
+        owner: null,
+        projects: [
+          {
+            name: 'project',
+            slug: 'project'
+          }
+        ],
+        ref: '6ba09a7c53235ee8a8fa5ee4c1ca8ca886e7fdbb',
+        shortVersion: 'web1-1.0.0',
+        url: null,
+        version: 'web1-1.0.0'
+      })
+      .post('/api/0/organizations/valid/releases/web1-1.0.0/deploys/')
+      .reply(201, {
+        name: 'amazon',
+        url: 'https://api.example.com/',
+        environment: 'production',
+        dateStarted: '2020-02-05T10:29:59Z',
+        dateFinished: '2020-02-05T10:30:43Z',
+        id: '5044917'
+      })
   })
 
   it(SERVER_ERROR_TITLE, async () => {
@@ -163,5 +199,22 @@ describe('Publish', () => {
     // @ts-ignore
     const result = await publish({ tagsUrl, sourcemaps, urlPrefix }, ctx)
     expect(result.release.version).to.equal('1.0.0')
+  })
+
+  it('Deploy app with releasePrefix', async () => {
+    ctx.env.SENTRY_PROJECT = 'project'
+    const filePath = tempWrite.sync('sourcemaps', 'dist/app.js.map')
+    const sourcemaps = path.dirname(filePath)
+    ctx.cwd = path.dirname(sourcemaps)
+    const urlPrefix = '~/dist'
+    const releasePrefix = 'web1'
+    // @ts-ignore
+    const result = await publish(
+      { tagsUrl, sourcemaps, urlPrefix, releasePrefix },
+      ctx
+    )
+    expect(result.release.version).to.equal(
+      `${releasePrefix}-${ctx.nextRelease.version}`
+    )
   })
 })
