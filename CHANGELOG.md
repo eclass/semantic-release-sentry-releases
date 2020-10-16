@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.6.1...v2.7.0) (2020-10-16)
+
+
+### Features
+
+* add releasePrefix to sentry release ([b529c0c](https://github.com/eclass/semantic-release-sentry-releases/commit/b529c0c451c93d1f6505fe21196a314a710af423))
+
 ## [2.6.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.6.0...v2.6.1) (2020-09-09)
 
 
