@@ -11,10 +11,10 @@
 
 > [semantic-release](https://github.com/semantic-release/semantic-release) plugin to create releases in [sentry](https://docs.sentry.io/workflow/releases/?platform=browsernpm#create-release)
 
-| Step               | Description                                                                                 |
-|--------------------|---------------------------------------------------------------------------------------------|
+| Step               | Description                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------ |
 | `verifyConditions` | Verify the presence of the `SENTRY_AUTH_TOKEN` `SENTRY_ORG` and `SENTRY_PROJECT` environment variable. |
-| `publish`          | Create release and deploy in sentry project.                                                                   |
+| `publish`          | Create release and deploy in sentry project.                                                           |
 
 ## Install
 
@@ -42,31 +42,31 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 ### Environment variables
 
-| Variable             | Description                                                       |
-| -------------------- | ----------------------------------------------------------------- |
+| Variable            | Description                                                                                                                                                                                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `SENTRY_AUTH_TOKEN` | The authentication token with permission for releases created in [profile](https://docs.sentry.io/api/auth/#id1) or as [internal integration](https://docs.sentry.io/product/integrations/integration-platform/#internal-integrations) in develeoper seetings of organization. |
-| `SENTRY_ORG` | The slug of the organization. |
-| `SENTRY_PROJECT` | The slug of the project. |
-| `SENTRY_URL` | The URL to use to connect to sentry. This defaults to https://sentry.io/. |
-| `DEPLOY_START` | Sentry deploy start timestamp. Optional for deploy |
-| `DEPLOY_END` | Sentry deploy end timestamp. Optional for deploy |
+| `SENTRY_ORG`        | The slug of the organization.                                                                                                                                                                                                                                                  |
+| `SENTRY_PROJECT`    | The slug of the project.                                                                                                                                                                                                                                                       |
+| `SENTRY_URL`        | The URL to use to connect to sentry. This defaults to https://sentry.io/.                                                                                                                                                                                                      |
+| `DEPLOY_START`      | Sentry deploy start timestamp. Optional for deploy                                                                                                                                                                                                                             |
+| `DEPLOY_END`        | Sentry deploy end timestamp. Optional for deploy                                                                                                                                                                                                                               |
 
 ### Options
 
-| Variable  | Description                                                       |
-| --------- | ----------------------------------------------------------------- |
-| `project` | The slug of the project. Optional. Required if not present in environment variables |
-| `org` | The slug of the organization. Optional. Required if not present in environment variables |
-| `url` | The URL to use to connect to sentry. Optional to set an on-premise instance |
-| `repositoryUrl` | A valid repository name for add link to commits of new release. Optional. Ex: 'myorg / myapp'. Default repository property in package.json, or git origin url. |
-| `tagsUrl` | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z |
-| `environment` | Sentry environment. Optional for deploy. Default production |
-| `deployName` | Deploy name. Optional for deploy |
-| `deployUrl` | Deploy url. Optional for deploy |
-| `sourcemaps` | Directory with sourcemaps. Example `dist`. Optional for upload sourcemaps |
-| `urlPrefix` | URL prefix for sourcemaps. Example `~/dist`. Optional for upload sourcemaps |
-| `rewrite` | Boolean to indicate rewrite sourcemaps. Default `false`. Optional for upload sourcemaps |
-| `releasePrefix`| String that is passed as prefix to the sentry release. <br/> Optional to fix the problem that releases are associated with the organization instead of the project ([Read More](https://github.com/getsentry/sentry-cli/issues/482)). <br/> Ex: `releasePrefix:"web1"` would resolve __only__ the sentry release to `web1-1.0.0`. <br/>__Important Notice:__ when you use this feature you also have to change the release name in your sentry client app. |
+| Variable        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project`       | The slug of the project. Optional. Required if not present in environment variables                                                                                                                                                                                                                                                                                                                                                                        |
+| `org`           | The slug of the organization. Optional. Required if not present in environment variables                                                                                                                                                                                                                                                                                                                                                                   |
+| `url`           | The URL to use to connect to sentry. Optional to set an on-premise instance                                                                                                                                                                                                                                                                                                                                                                                |
+| `repositoryUrl` | A valid repository name for add link to commits of new release. Optional. Ex: 'myorg / myapp'. Default repository property in package.json, or git origin url.                                                                                                                                                                                                                                                                                             |
+| `tagsUrl`       | A valid url for add link to new release. Optional. Ex: https://github.com/owner/repo/releases/tag/vx.y.z                                                                                                                                                                                                                                                                                                                                                   |
+| `environment`   | Sentry environment. Optional for deploy. Default production                                                                                                                                                                                                                                                                                                                                                                                                |
+| `deployName`    | Deploy name. Optional for deploy                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `deployUrl`     | Deploy url. Optional for deploy                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `sourcemaps`    | Directory with sourcemaps. Example `dist`. Optional for upload sourcemaps                                                                                                                                                                                                                                                                                                                                                                                  |
+| `urlPrefix`     | URL prefix for sourcemaps. Example `~/dist`. Optional for upload sourcemaps                                                                                                                                                                                                                                                                                                                                                                                |
+| `rewrite`       | Boolean to indicate rewrite sourcemaps. Default `false`. Optional for upload sourcemaps                                                                                                                                                                                                                                                                                                                                                                    |
+| `releasePrefix` | String that is passed as prefix to the sentry release. <br/> Optional to fix the problem that releases are associated with the organization instead of the project ([Read More](https://github.com/getsentry/sentry-cli/issues/482)). <br/> Ex: `releasePrefix:"web1"` would resolve **only** the sentry release to `web1-1.0.0`. <br/>**Important Notice:** when you use this feature you also have to change the release name in your sentry client app. |
 
 ### Examples
 
@@ -89,6 +89,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 ```
 
 #### Upload sourcemaps
+
 ```json
 {
   "plugins": [
@@ -133,7 +134,7 @@ cache:
   directories:
     - ~/.npm
 node_js:
-  - "12"
+  - '12'
 stages:
   - test
   - name: deploy
@@ -144,7 +145,6 @@ jobs:
       script: npm t
     - stage: deploy
       script: npx semantic-release
-
 ```
 
 ## License

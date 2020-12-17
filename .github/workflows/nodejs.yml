@@ -6,59 +6,59 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: "12.14.1"
-    - uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-    - run: npm ci
-    - name: eslint
-      run: npx eslint .
-    - name: test
-      run: npm test
-      env:
-        CI: true
-    - uses: actions/upload-artifact@v2
-      with:
-        name: coverage
-        path: .nyc_output
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.14.1'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm ci
+      - name: eslint
+        run: npx eslint .
+      - name: test
+        run: npm test
+        env:
+          CI: true
+      - uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: .nyc_output
   coverage:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: "12.14.1"
-    - uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-    - run: npm ci
-    - uses: actions/download-artifact@v2
-      with:
-        name: coverage
-        path: .nyc_output
-    - name: coverage
-      run: |
-        npm i -g coveralls
-        npx nyc check-coverage
-        npx nyc report > lcov.info
-        coveralls < lcov.info
-      env:
-        CI: true
-        COVERALLS_REPO_TOKEN: ${{ secrets. COVERALLS_REPO_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12.14.1'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm ci
+      - uses: actions/download-artifact@v2
+        with:
+          name: coverage
+          path: .nyc_output
+      - name: coverage
+        run: |
+          npm i -g coveralls
+          npx nyc check-coverage
+          npx nyc report > lcov.info
+          coveralls < lcov.info
+        env:
+          CI: true
+          COVERALLS_REPO_TOKEN: ${{ secrets. COVERALLS_REPO_TOKEN }}
   release:
     if: github.ref == 'refs/heads/master'
     needs: coverage
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: "12.14.1"
+          node-version: '12.14.1'
       - uses: actions/cache@v2
         with:
           path: ~/.npm
