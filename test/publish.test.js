@@ -7,17 +7,6 @@ const tempWrite = require('temp-write')
 const mock = require('mock-require')
 
 // eslint-disable-next-line require-jsdoc
-class SentryCliMock {
-  // eslint-disable-next-line require-jsdoc
-  constructor () {
-    this.releases = {
-      uploadSourceMaps: () => Promise.resolve()
-    }
-  }
-}
-mock('@sentry/cli', SentryCliMock)
-
-// eslint-disable-next-line require-jsdoc
 const gitDiffTree = (repoPath, options) => {
   const event = new EventEmitter()
   setTimeout(() => {
@@ -111,6 +100,8 @@ describe('Publish', () => {
         url: null,
         version: '1.0.0'
       })
+      .post('/api/0/organizations/valid/releases/1.0.0/files/')
+      .reply(201)
       .post('/api/0/organizations/valid/releases/1.0.0/deploys/')
       .reply(201, {
         name: 'amazon',

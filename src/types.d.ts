@@ -5,8 +5,11 @@ import {
   Commit
 } from 'semantic-release'
 
-export interface Context extends SemanticReleaseContext, SemanticReleaseConfig, SemanticReleaseResult {
-  commits?: Commit[],
+export interface Context
+  extends SemanticReleaseContext,
+    SemanticReleaseConfig,
+    SemanticReleaseResult {
+  commits?: Commit[]
   message?: string
 }
 
@@ -115,4 +118,9 @@ export interface PublishResult {
 export interface GitDiffTreeData {
   toFile: string
   status: PATCH_SET_TYPES
+}
+
+export interface SentryOrganizationReleaseFile {
+  name: string
+  file: string
 }

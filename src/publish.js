@@ -1,8 +1,8 @@
 const path = require('path')
-const SentryCli = require('@sentry/cli')
 const getError = require('./get-error')
 const parseCommits = require('./parse-commits')
-const { createRelease, createDeploy } = require('./request')
+const getAssets = require('./get-assets')
+const { createRelease, createDeploy, uploadSourceFiles } = require('./request')
 
 /**
  * @typedef {import('./types').Context} Context
@@ -78,15 +78,22 @@ module.exports = async (pluginConfig, ctx) => {
     process.env.SENTRY_ORG = org
     process.env.SENTRY_URL = url
     process.env.SENTRY_PROJECT = project
-    const cli = new SentryCli()
     if (pluginConfig.sourcemaps && pluginConfig.urlPrefix) {
       const sourcemaps = path.resolve(ctx.cwd, pluginConfig.sourcemaps)
+      ctx.logger.log('Searching sourcemaps in %s', sourcemaps)
+      const assets = await getAssets(
+        pluginConfig.sourcemaps,
+        pluginConfig.urlPrefix
+      )
       ctx.logger.log('Uploading sourcemaps from %s', sourcemaps)
-      await cli.releases.uploadSourceMaps(sentryReleaseVersion, {
-        include: [sourcemaps],
-        urlPrefix: pluginConfig.urlPrefix,
-        rewrite: pluginConfig.rewrite || false
-      })
+      await uploadSourceFiles(
+        assets,
+        pluginConfig.rewrite || false,
+        ctx.env.SENTRY_AUTH_TOKEN,
+        org,
+        url,
+        sentryReleaseVersion
+      )
       ctx.logger.log('Sourcemaps uploaded')
     }
     const deployData = getDeployData(pluginConfig, ctx)
