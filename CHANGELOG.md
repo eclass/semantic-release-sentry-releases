@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.7.0...v2.8.0) (2020-12-17)
+
+
+### Features
+
+* **publish:** upload files with api ([a0374c7](https://github.com/eclass/semantic-release-sentry-releases/commit/a0374c762a7ed8995c944012b706ea419aed1c1a))
+
 # [2.7.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.6.1...v2.7.0) (2020-10-16)
 
 
