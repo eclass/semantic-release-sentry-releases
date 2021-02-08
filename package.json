@@ -45,7 +45,7 @@
     "@types/mock-require": "2.0.0",
     "@types/node": "12.19.16",
     "@types/semantic-release": "17.2.0",
-    "chai": "4.2.0",
+    "chai": "4.3.0",
     "eslint": "7.19.0",
     "eslint-plugin-array-func": "3.1.7",
     "eslint-plugin-eslint-comments": "3.2.0",
