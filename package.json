@@ -6,7 +6,10 @@
   "scripts": {
     "lint": "prettier-standard --lint '{src,test}/**/*.js'",
     "ts-compile-check": "tsc -p tsconfig.json --noEmit",
-    "test": "nyc mocha test"
+    "test": "nyc mocha test",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "engines": {
     "node": ">=12"
@@ -63,6 +66,7 @@
     "nock": "13.0.7",
     "nyc": "15.1.0",
     "nyc-config-common": "1.0.1",
+    "pinst": "2.1.4",
     "prettier-standard": "16.4.1",
     "semantic-release": "17.3.9",
     "temp-write": "4.0.0",
