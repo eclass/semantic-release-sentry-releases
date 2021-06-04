@@ -1,4 +1,5 @@
 const getCommitPatchSet = require('./diff-tree')
+const path = require('path')
 
 /**
  * @typedef {import('./types').Config} Config
@@ -26,7 +27,12 @@ const parseCommits = async (pluginConfig, ctx) => {
       timestamp: commit.committerDate,
       repository: pluginConfig.repositoryUrl || ctx.options.repositoryUrl
     }
-    releaseCommit.patch_set = await getCommitPatchSet(ctx.cwd, releaseCommit.id)
+    releaseCommit.patch_set = await getCommitPatchSet(
+      pluginConfig.pathToGitFolder
+        ? path.resolve(ctx.cwd, pluginConfig.pathToGitFolder)
+        : ctx.cwd,
+      releaseCommit.id
+    )
     commits.push(releaseCommit)
   }
   return commits
