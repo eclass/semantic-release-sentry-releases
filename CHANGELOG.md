@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.8.0...v2.9.0) (2021-06-11)
+
+
+### Features
+
+* add option to specify path to git folder if not in current working directory ([2c3c40e](https://github.com/eclass/semantic-release-sentry-releases/commit/2c3c40eeb790e7a7ac405d31e757e25773ebd603))
+
 # [2.8.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.7.0...v2.8.0) (2020-12-17)
 
 
