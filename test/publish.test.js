@@ -25,7 +25,8 @@ describe('Publish', () => {
     env: {
       SENTRY_ORG: 'valid',
       SENTRY_PROJECT: 'error',
-      SENTRY_AUTH_TOKEN: 'valid'
+      SENTRY_AUTH_TOKEN: 'valid',
+      SENTRY_ENVIRONMENT: 'environment'
     },
     commits: [
       {
@@ -106,7 +107,7 @@ describe('Publish', () => {
       .reply(201, {
         name: 'amazon',
         url: 'https://api.example.com/',
-        environment: 'production',
+        environment: ctx.env.SENTRY_ENVIRONMENT,
         dateStarted: '2020-02-05T10:29:59Z',
         dateFinished: '2020-02-05T10:30:43Z',
         id: '5044917'
@@ -206,6 +207,19 @@ describe('Publish', () => {
     )
     expect(result.release.version).to.equal(
       `${releasePrefix}-${ctx.nextRelease.version}`
+    )
+  })
+
+  it('Deploy app with environment from environment', async () => {
+    ctx.env.SENTRY_PROJECT = 'project'
+
+    // @ts-ignore
+    const result = await publish(
+      { tagsUrl },
+      ctx
+    )
+    expect(result.deploy.environment).to.equal(
+      ctx.env.SENTRY_ENVIRONMENT
     )
   })
 })
