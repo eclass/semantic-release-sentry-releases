@@ -22,7 +22,7 @@ const { createRelease, createDeploy, uploadSourceFiles } = require('./request')
 const getDeployData = (pluginConfig, ctx) => {
   /** @type {SentryDeployParams} */
   const deployData = {
-    environment: pluginConfig.environment || 'production'
+    environment: ctx.env.SENTRY_ENVIRONMENT || pluginConfig.environment || 'production'
   }
   if (pluginConfig.deployName) {
     deployData.name = pluginConfig.deployName
