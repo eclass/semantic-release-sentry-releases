@@ -36,8 +36,8 @@
     "git-diff-tree": "^1.1.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "12.1.4",
-    "@commitlint/config-conventional": "12.1.4",
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
     "@eclass/eslint-config": "2.0.1",
     "@eclass/semantic-release-npm-github-config": "3.0.1",
     "@semantic-release/changelog": "5.0.1",
