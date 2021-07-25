@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "prettier-standard --lint '{src,test}/**/*.js'",
+    "lint:check": "eslint '{src,test}/**/*.js'",
     "ts-compile-check": "tsc -p tsconfig.json --noEmit",
     "test": "nyc mocha test",
     "postinstall": "husky install",

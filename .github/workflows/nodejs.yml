@@ -20,7 +20,7 @@ jobs:
             ${{ runner.os }}-
       - run: npm ci
       - name: eslint
-        run: npx eslint .
+        run: npm run lint:check
       - name: test
         run: npm test
         env:
