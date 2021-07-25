@@ -31,7 +31,7 @@
   "homepage": "https://github.com/eclass/semantic-release-sentry-releases#readme",
   "dependencies": {
     "@semantic-release/error": "^2.1.0",
-    "aggregate-error": "^3.1.0",
+    "aggregate-error": "^4.0.0",
     "form-data": "^4.0.0",
     "git-diff-tree": "^1.1.0"
   },
