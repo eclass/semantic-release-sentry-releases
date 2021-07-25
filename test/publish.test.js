@@ -214,12 +214,7 @@ describe('Publish', () => {
     ctx.env.SENTRY_PROJECT = 'project'
 
     // @ts-ignore
-    const result = await publish(
-      { tagsUrl },
-      ctx
-    )
-    expect(result.deploy.environment).to.equal(
-      ctx.env.SENTRY_ENVIRONMENT
-    )
+    const result = await publish({ tagsUrl }, ctx)
+    expect(result.deploy.environment).to.equal(ctx.env.SENTRY_ENVIRONMENT)
   })
 })
