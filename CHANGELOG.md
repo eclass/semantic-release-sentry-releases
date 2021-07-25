@@ -1,3 +1,15 @@
+# [2.10.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.9.1...v2.10.0) (2021-07-25)
+
+
+### Features
+
+* **publish:** use SENTRY_ENVIRONMENT variable for deployments ([022a917](https://github.com/eclass/semantic-release-sentry-releases/commit/022a91779252ba906289405bdedafee67554f472))
+
+
+### Reverts
+
+* Revert "chore(deps): update dependency temp-write to v5" ([85c94e6](https://github.com/eclass/semantic-release-sentry-releases/commit/85c94e647a6f83ef55f7f93cda035aca13a1f663))
+
 ## [2.9.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.9.0...v2.9.1) (2021-07-25)
 
 
