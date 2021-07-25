@@ -1,6 +1,14 @@
 {
   "automerge": "minor",
-  "extends": [
-    "config:js-lib"
+  "extends": ["config:js-lib"],
+  "packageRules": [
+    {
+      "packageNames": ["aggregate-error"],
+      "allowedVersions": "<4"
+    },
+    {
+      "packageNames": ["temp-write"],
+      "allowedVersions": "<5"
+    }
   ]
 }
