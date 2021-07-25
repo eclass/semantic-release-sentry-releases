@@ -1,3 +1,10 @@
+## [2.9.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.9.0...v2.9.1) (2021-07-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency form-data to v4 ([c0c252b](https://github.com/eclass/semantic-release-sentry-releases/commit/c0c252b0dc185f7c6b55cdbdf1344fb9b451744f))
+
 # [2.9.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.8.0...v2.9.0) (2021-06-11)
 
 
