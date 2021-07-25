@@ -21,6 +21,10 @@ jobs:
       - run: npm ci
       - name: eslint
         run: npm run lint:check
+      - name: eslint
+        run: npm run format:check
+      - name: ts-compile-check
+        run: npm run ts-compile-check
       - name: test
         run: npm test
         env:
