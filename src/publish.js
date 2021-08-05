@@ -68,12 +68,14 @@ module.exports = async (pluginConfig, ctx) => {
     }
     const org = ctx.env.SENTRY_ORG || pluginConfig.org
     const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
+    ctx.logger.log('Sentry Url %s', url)
     ctx.logger.log('Creating release %s', sentryReleaseVersion)
     const release = await createRelease(
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
-      url
+      url,
+      ctx
     )
     ctx.logger.log('Release created')
     process.env.SENTRY_ORG = org
@@ -104,7 +106,8 @@ module.exports = async (pluginConfig, ctx) => {
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
       url,
-      sentryReleaseVersion
+      sentryReleaseVersion,
+      ctx
     )
     ctx.logger.log('Deploy created')
     return { release, deploy }
