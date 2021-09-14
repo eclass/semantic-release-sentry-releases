@@ -1,3 +1,11 @@
+## [2.10.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.10.0...v2.10.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* **logger:** append response error to logger ([344c46b](https://github.com/eclass/semantic-release-sentry-releases/commit/344c46bbbb99e399092a6dc387399bd88826cf82)), closes [#355](https://github.com/eclass/semantic-release-sentry-releases/issues/355)
+* **publish:** fix set repository in commit logs ([c09041f](https://github.com/eclass/semantic-release-sentry-releases/commit/c09041f9f569fc535995205e62a4e26875ae4f09)), closes [#355](https://github.com/eclass/semantic-release-sentry-releases/issues/355)
+
 # [2.10.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.9.1...v2.10.0) (2021-07-25)
 
 
