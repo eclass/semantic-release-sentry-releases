@@ -1,7 +1,11 @@
 {
-  "automerge": "minor",
   "extends": ["config:js-lib"],
+  "assignees": ["lgaticaq"],
   "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
     {
       "packageNames": ["aggregate-error"],
       "allowedVersions": "<4"
