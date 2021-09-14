@@ -2,7 +2,12 @@ const path = require('path')
 const getError = require('./get-error')
 const parseCommits = require('./parse-commits')
 const getAssets = require('./get-assets')
-const { createRelease, createDeploy, uploadSourceFiles } = require('./request')
+const {
+  createRelease,
+  createDeploy,
+  uploadSourceFiles,
+  getRepositoryName
+} = require('./request')
 
 /**
  * @typedef {import('./types').Context} Context
@@ -51,6 +56,15 @@ module.exports = async (pluginConfig, ctx) => {
   try {
     const tagsUrl = pluginConfig.tagsUrl || ''
     const project = ctx.env.SENTRY_PROJECT || pluginConfig.project
+    const org = ctx.env.SENTRY_ORG || pluginConfig.org
+    const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
+    ctx.logger.log('Retrieving repository name')
+    pluginConfig.repositoryUrl = await getRepositoryName(
+      ctx.env.SENTRY_AUTH_TOKEN,
+      org,
+      url,
+      pluginConfig.repositoryUrl || ctx.options.repositoryUrl
+    )
     ctx.logger.log('Retrieving commits data')
     const commits = await parseCommits(pluginConfig, ctx)
     ctx.logger.log('Commit data retrieved')
@@ -66,8 +80,6 @@ module.exports = async (pluginConfig, ctx) => {
     if (tagsUrl !== '') {
       releaseDate.url = `${tagsUrl}/v${ctx.nextRelease.version}`
     }
-    const org = ctx.env.SENTRY_ORG || pluginConfig.org
-    const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
     ctx.logger.log('Creating release %s', sentryReleaseVersion)
     const release = await createRelease(
       releaseDate,

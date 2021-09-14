@@ -25,7 +25,7 @@ const parseCommits = async (pluginConfig, ctx) => {
       author_name: commit.author.name,
       author_email: commit.author.email,
       timestamp: commit.committerDate,
-      repository: pluginConfig.repositoryUrl || ctx.options.repositoryUrl
+      repository: pluginConfig.repositoryUrl
     }
     releaseCommit.patch_set = await getCommitPatchSet(
       pluginConfig.pathToGitFolder

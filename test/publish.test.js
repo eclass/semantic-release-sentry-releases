@@ -75,6 +75,23 @@ describe('Publish', () => {
   beforeEach(() => {
     nock.disableNetConnect()
     nock(SENTRY_HOST, NOCK_OPTIONS)
+      .get('/api/0/organizations/valid/repos/')
+      .reply(200, [
+        {
+          id: '1',
+          name: 'eclass / semantic-release-sentry-releases',
+          url: 'github.com/eclass/semantic-release-sentry-releases',
+          provider: {
+            id: 'integrations:github',
+            name: 'Github'
+          },
+          status: 'active',
+          dateCreated: '2020-10-30T20:05:57.053153Z',
+          integrationId: '1',
+          externalSlug: 1
+        }
+      ])
+    nock(SENTRY_HOST, NOCK_OPTIONS)
       .post(PATH_RELEASE, body => body.projects.includes('error'))
       .reply(400, {
         commits: {

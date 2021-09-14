@@ -125,3 +125,19 @@ export interface SentryOrganizationReleaseFile {
   name: string
   file: string
 }
+
+export interface SentryOrganizationRepositoryProvider {
+  id: string
+  name: string
+}
+
+export interface SentryOrganizationRepository {
+  id: string
+  name: string
+  url: string
+  provider: SentryOrganizationRepositoryProvider
+  status: string
+  dateCreated: string
+  integrationId: string
+  externalSlug: number
+}

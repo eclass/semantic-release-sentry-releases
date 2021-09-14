@@ -13,6 +13,7 @@ const getError = require('./get-error')
  * @typedef {import('./types').SentryReleaseSuccessResponse} SentryReleaseSuccessResponse
  * @typedef {import('./types').SentryOrganizationReleaseFile} SentryOrganizationReleaseFile
  * @typedef {import('./types').PATCH_SET_TYPES} PATCH_SET_TYPES
+ * @typedef {import('./types').SentryOrganizationRepository} SentryOrganizationRepository
  * @typedef {import('http').RequestOptions} RequestOptions
  */
 
@@ -36,6 +37,7 @@ const request = (path, data, token, url) =>
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
+        // eslint-disable-next-line sonarjs/no-duplicate-string
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(postData)
       }
@@ -229,4 +231,68 @@ const uploadSourceFiles = async (files, rewrite, token, org, url, version) => {
   }
 }
 
-module.exports = { createRelease, createDeploy, verify, uploadSourceFiles }
+/**
+ * @param {string} token -
+ * @param {string} org -
+ * @param {string} url -
+ * @param {string} repositoryUrl -
+ * @returns {Promise<*>} -
+ * @example
+ * await getRepositoryName(token, org, url)
+ */
+const getRepositoryName = (token, org, url, repositoryUrl) =>
+  new Promise(resolve => {
+    const defaultUrl = repositoryUrl.substring(0, 64)
+    const { hostname, protocol } = new URL(url)
+    /** @type {RequestOptions} */
+    const options = {
+      hostname,
+      path: `/api/0/organizations/${org}/repos/`,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+    const client = protocol === 'http:' ? http : https
+    const req = client.request(options, res => {
+      /** @type {Array<Buffer>} */
+      const chunks = []
+      let totalLength = 0
+      res.on('data', (/** @type {Buffer} */ chunk) => {
+        chunks.push(chunk)
+        totalLength += chunk.length
+      })
+      res.on('end', () => {
+        try {
+          const raw = Buffer.concat(chunks, totalLength).toString()
+          /** @type {SentryOrganizationRepository[]} */
+          const body = JSON.parse(raw || '[{}]')
+          if (res.statusCode === 200) {
+            const found = body.find(repository => {
+              const name = repository.name.replace(/\s/g, '')
+              // eslint-disable-next-line security/detect-non-literal-regexp
+              const pattern = new RegExp(`${name}(.git)?$`)
+              return pattern.test(repositoryUrl)
+            })
+            const name = found ? found.name : defaultUrl
+            resolve(name)
+          } else {
+            resolve(defaultUrl)
+          }
+        } catch (err) {
+          resolve(defaultUrl)
+        }
+      })
+    })
+    req.on('error', () => resolve(defaultUrl))
+    req.end()
+  })
+
+module.exports = {
+  createRelease,
+  createDeploy,
+  verify,
+  uploadSourceFiles,
+  getRepositoryName
+}
