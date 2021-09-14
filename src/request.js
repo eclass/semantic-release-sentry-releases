@@ -42,9 +42,6 @@ const request = (path, data, token, url) =>
     }
     const client = protocol === 'http:' ? http : https
     const req = client.request(options, res => {
-      if (res.statusCode !== 201) {
-        return reject(new Error(`Invalid status code: ${res.statusCode}`))
-      }
       /** @type {Array<Buffer>} */
       const chunks = []
       let totalLength = 0
@@ -54,7 +51,16 @@ const request = (path, data, token, url) =>
       })
       res.on('end', () => {
         try {
-          resolve(JSON.parse(Buffer.concat(chunks, totalLength).toString()))
+          const bodyString = Buffer.concat(chunks, totalLength).toString()
+          const body = JSON.parse(bodyString)
+          if (res.statusCode !== 201) {
+            return reject(
+              new Error(
+                `Invalid status code: ${res.statusCode}\nResponse: ${bodyString}`
+              )
+            )
+          }
+          resolve(body)
         } catch (err) {
           reject(err)
         }

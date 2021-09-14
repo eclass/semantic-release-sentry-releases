@@ -19,6 +19,14 @@ mock('git-diff-tree', gitDiffTree)
 
 const publish = require('../src/publish')
 
+// eslint-disable-next-line require-jsdoc
+const getCwd = () => {
+  const filePath = tempWrite.sync('sourcemaps', 'dist/app.js.map')
+  const sourcemaps = path.dirname(filePath)
+  const cwd = path.dirname(sourcemaps)
+  return { cwd, sourcemaps }
+}
+
 describe('Publish', () => {
   /** @type {import('../src/types').Context} */
   const ctx = {
@@ -66,6 +74,13 @@ describe('Publish', () => {
 
   beforeEach(() => {
     nock.disableNetConnect()
+    nock(SENTRY_HOST, NOCK_OPTIONS)
+      .post(PATH_RELEASE, body => body.projects.includes('error'))
+      .reply(400, {
+        commits: {
+          repository: ['Ensure this field has no more than 64 characters.']
+        }
+      })
     nock(SENTRY_HOST, NOCK_OPTIONS)
       .post(PATH_RELEASE, body => body.projects.includes('error'))
       .reply(500)
@@ -152,6 +167,21 @@ describe('Publish', () => {
 
   it(SERVER_ERROR_TITLE, async () => {
     try {
+      const { cwd } = getCwd()
+      ctx.cwd = cwd
+      // @ts-ignore
+      await publish({ tagsUrl: '' }, ctx)
+    } catch (err) {
+      expect(err.name).to.equal('SemanticReleaseError')
+      expect(err.code).to.equal('ESENTRYDEPLOY')
+    }
+  })
+
+  // eslint-disable-next-line sonarjs/no-identical-functions
+  it(SERVER_ERROR_TITLE, async () => {
+    try {
+      const { cwd } = getCwd()
+      ctx.cwd = cwd
       // @ts-ignore
       await publish({ tagsUrl: '' }, ctx)
     } catch (err) {
@@ -162,6 +192,8 @@ describe('Publish', () => {
 
   it(SERVER_ERROR_TITLE, async () => {
     try {
+      const { cwd } = getCwd()
+      ctx.cwd = cwd
       ctx.env.SENTRY_PROJECT = 'invalid'
       // @ts-ignore
       await publish({ tagsUrl }, ctx)
@@ -173,6 +205,8 @@ describe('Publish', () => {
 
   it(SERVER_ERROR_TITLE, async () => {
     try {
+      const { cwd } = getCwd()
+      ctx.cwd = cwd
       ctx.env.SENTRY_PROJECT = 'server'
       // @ts-ignore
       await publish({ tagsUrl }, ctx)
@@ -184,9 +218,8 @@ describe('Publish', () => {
 
   it('Deploy app', async () => {
     ctx.env.SENTRY_PROJECT = 'project'
-    const filePath = tempWrite.sync('sourcemaps', 'dist/app.js.map')
-    const sourcemaps = path.dirname(filePath)
-    ctx.cwd = path.dirname(sourcemaps)
+    const { cwd, sourcemaps } = getCwd()
+    ctx.cwd = cwd
     const urlPrefix = '~/dist'
     // @ts-ignore
     const result = await publish({ tagsUrl, sourcemaps, urlPrefix }, ctx)
@@ -195,9 +228,8 @@ describe('Publish', () => {
 
   it('Deploy app with releasePrefix', async () => {
     ctx.env.SENTRY_PROJECT = 'project'
-    const filePath = tempWrite.sync('sourcemaps', 'dist/app.js.map')
-    const sourcemaps = path.dirname(filePath)
-    ctx.cwd = path.dirname(sourcemaps)
+    const { cwd, sourcemaps } = getCwd()
+    ctx.cwd = cwd
     const urlPrefix = '~/dist'
     const releasePrefix = 'web1'
     // @ts-ignore
@@ -212,7 +244,8 @@ describe('Publish', () => {
 
   it('Deploy app with environment from environment', async () => {
     ctx.env.SENTRY_PROJECT = 'project'
-
+    const { cwd } = getCwd()
+    ctx.cwd = cwd
     // @ts-ignore
     const result = await publish({ tagsUrl }, ctx)
     expect(result.deploy.environment).to.equal(ctx.env.SENTRY_ENVIRONMENT)
