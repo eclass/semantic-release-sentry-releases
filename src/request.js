@@ -55,7 +55,7 @@ const request = (path, data, token, url) =>
         try {
           const bodyString = Buffer.concat(chunks, totalLength).toString()
           const body = JSON.parse(bodyString)
-          if (res.statusCode !== 201) {
+          if (![201, 208].includes(res.statusCode)) {
             return reject(
               new Error(
                 `Invalid status code: ${res.statusCode}\nResponse: ${bodyString}`
