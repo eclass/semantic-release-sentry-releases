@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.10.1...v2.11.0) (2021-10-01)
+
+
+### Features
+
+* **request:** allow response status code 208 when requesting ([28aff72](https://github.com/eclass/semantic-release-sentry-releases/commit/28aff7247c7f78dcc32bfd89f15fada7cb4a4327))
+
 ## [2.10.1](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.10.0...v2.10.1) (2021-09-14)
 
 
