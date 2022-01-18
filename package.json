@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/eclass/semantic-release-sentry-releases#readme",
   "dependencies": {
-    "@semantic-release/error": "^2.1.0",
+    "@semantic-release/error": "^3.0.0",
     "aggregate-error": "^3.1.0",
     "form-data": "^4.0.0",
     "git-diff-tree": "^1.1.0"
@@ -42,8 +42,8 @@
     "@commitlint/config-conventional": "13.2.0",
     "@eclass/eslint-config": "2.0.1",
     "@eclass/semantic-release-npm-github-config": "3.0.1",
-    "@semantic-release/changelog": "5.0.1",
-    "@semantic-release/git": "9.0.1",
+    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/git": "10.0.1",
     "@sentry/types": "6.16.1",
     "@types/chai": "4.3.0",
     "@types/mocha": "9.1.0",
@@ -70,11 +70,11 @@
     "nyc-config-common": "1.0.1",
     "pinst": "2.1.6",
     "prettier-standard": "16.4.1",
-    "semantic-release": "17.4.7",
+    "semantic-release": "19.0.2",
     "temp-write": "4.0.0",
     "typescript": "4.5.4"
   },
   "peerDependencies": {
-    "semantic-release": ">=11.0.0 <18.0.0"
+    "semantic-release": ">=11.0.0 <20.0.0"
   }
 }
