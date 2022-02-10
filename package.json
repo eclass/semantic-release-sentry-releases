@@ -14,7 +14,7 @@
     "postpublish": "pinst --enable"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14.17"
   },
   "repository": {
     "type": "git",
@@ -75,6 +75,6 @@
     "typescript": "4.5.5"
   },
   "peerDependencies": {
-    "semantic-release": ">=11.0.0 <20.0.0"
+    "semantic-release": ">=18.0.0"
   }
 }
