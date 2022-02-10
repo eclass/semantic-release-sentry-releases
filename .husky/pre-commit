@@ -4,4 +4,5 @@
 
 . "$(dirname "$0")/_/husky.sh"
 
+npm run ts-compile-check
 npx --no-install lint-staged
