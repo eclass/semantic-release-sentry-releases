@@ -8,9 +8,9 @@ const path = require('path')
  */
 
 /**
- * @param {Config} pluginConfig -
- * @param {Context} ctx -
- * @returns {Promise<Array<SentryReleaseCommit>>} -
+ * @param {Config} pluginConfig -.
+ * @param {Context} ctx -.
+ * @returns {Promise<Array<SentryReleaseCommit>>} -.
  * @example
  * const commits = await parseCommits(ctx)
  */
@@ -25,13 +25,13 @@ const parseCommits = async (pluginConfig, ctx) => {
       author_name: commit.author.name,
       author_email: commit.author.email,
       timestamp: commit.committerDate,
-      repository: pluginConfig.repositoryUrl
+      repository: pluginConfig.repositoryUrl,
     }
     releaseCommit.patch_set = await getCommitPatchSet(
       pluginConfig.pathToGitFolder
         ? path.resolve(ctx.cwd, pluginConfig.pathToGitFolder)
         : ctx.cwd,
-      releaseCommit.id
+      releaseCommit.id,
     )
     commits.push(releaseCommit)
   }

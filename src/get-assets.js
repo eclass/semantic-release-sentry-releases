@@ -13,20 +13,20 @@ const path = require('path')
  * @example
  * const sourcefiles = await getFiles(path.resolve(ctx.cwd, pluginConfig.sourcemaps))
  */
-async function getFiles (
+async function getFiles(
   dir,
   urlPrefix,
   appendPath = false,
-  extensions = ['.js', '.map', '.jsbundle', '.bundle']
+  extensions = ['.js', '.map', '.jsbundle', '.bundle'],
 ) {
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   const entries = await fs.readdir(dir, { withFileTypes: true })
 
   // Get files within the current directory and add a path key to the file objects
   const files = entries
-    .filter(file => !file.isDirectory())
-    .filter(file => extensions.includes(path.extname(file.name)))
-    .map(file => {
+    .filter((file) => !file.isDirectory())
+    .filter((file) => extensions.includes(path.extname(file.name)))
+    .map((file) => {
       const paths = [urlPrefix]
       if (appendPath) paths.push(path.basename(dir))
       paths.push(file.name)
@@ -34,7 +34,7 @@ async function getFiles (
     })
 
   // Get folders within the current directory
-  const folders = entries.filter(folder => folder.isDirectory())
+  const folders = entries.filter((folder) => folder.isDirectory())
 
   /*
     Add the found files within the subdirectory to the files array by calling the
@@ -42,7 +42,7 @@ async function getFiles (
   */
   for (const folder of folders) {
     files.push(
-      ...(await getFiles(path.join(dir, folder.name), urlPrefix, true))
+      ...(await getFiles(path.join(dir, folder.name), urlPrefix, true)),
     )
   }
 
