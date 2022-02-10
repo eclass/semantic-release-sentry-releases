@@ -6,8 +6,8 @@
   "scripts": {
     "lint": "eslint --fix '{src,test}/**/*.js'",
     "lint:check": "eslint '{src,test}/**/*.js'",
-    "format": "prettier --write '{src,test}/**/*.js'",
-    "format:check": "prettier --check '{src,test}/**/*.js'",
+    "format": "prettier --write '{src,test}/**/*.{js,ts}' '*.{json,md}' '.prettierrc' '.{github,vscode}/**/*'",
+    "format:check": "prettier --check '{src,test}/**/*.{js,ts}' '*.{json,md}' '.prettierrc' '.{github,vscode}/**/*'",
     "ts-compile-check": "tsc -p tsconfig.json --noEmit",
     "test": "nyc mocha test",
     "postinstall": "husky install",
