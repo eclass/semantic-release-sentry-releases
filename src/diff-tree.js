@@ -11,19 +11,19 @@ const GIT_DIFF_TREE_TYPES = {
   RAW_DATA: 'raw',
   PATCH_DATA: 'patch',
   FILE_STATS: 'stats',
-  NO_SHOW: 'noshow'
+  NO_SHOW: 'noshow',
 }
 
 const PATCH_SET_TYPES = {
   ADD: 'A',
   MODIFY: 'M',
   DELETE: 'D',
-  RENAME: 'R'
+  RENAME: 'R',
 }
 /**
- * @param {string} basedir -
- * @param {string} rev -
- * @returns {Promise<Array<SentryReleasePatchSet>>} -
+ * @param {string} basedir -.
+ * @param {string} rev -.
+ * @returns {Promise<Array<SentryReleasePatchSet>>} -.
  * @example
  * const patchSet = await getCommitPatchSet('abcdef')
  */
@@ -37,8 +37,8 @@ const getCommitPatchSet = (basedir, rev = 'HEAD') => {
         'data',
         // eslint-disable-next-line valid-jsdoc, jsdoc/require-example
         /**
-         * @param {GIT_DIFF_TREE_TYPES} type -
-         * @param {GitDiffTreeData} data -
+         * @param {GIT_DIFF_TREE_TYPES} type -.
+         * @param {GitDiffTreeData} data -.
          */
         (type, data) => {
           if (
@@ -47,9 +47,9 @@ const getCommitPatchSet = (basedir, rev = 'HEAD') => {
           ) {
             patchSet.push({ path: data.toFile, type: data.status })
           }
-        }
+        },
       )
-      .on('error', err => reject(err))
+      .on('error', (err) => reject(err))
       .on('end', () => {
         resolve(patchSet)
       })

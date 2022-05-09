@@ -34,7 +34,7 @@ describe('Publish', () => {
       SENTRY_ORG: 'valid',
       SENTRY_PROJECT: 'error',
       SENTRY_AUTH_TOKEN: 'valid',
-      SENTRY_ENVIRONMENT: 'environment'
+      SENTRY_ENVIRONMENT: 'environment',
     },
     commits: [
       {
@@ -46,15 +46,15 @@ describe('Publish', () => {
         tree: { long: '', short: '' },
         body: '',
         committer: { name: 'me', email: 'me@me.me', short: '' },
-        subject: ''
-      }
+        subject: '',
+      },
     ],
     nextRelease: {
       version: '1.0.0',
       gitTag: 'v1.0.0',
       type: 'major',
       gitHead: '',
-      notes: ''
+      notes: '',
     },
     logger: { log: () => ({}), error: () => ({}) },
     options: {
@@ -62,8 +62,8 @@ describe('Publish', () => {
         'https://github.com/eclass/semantic-release-sentry-releases.git',
       branches: '',
       plugins: [],
-      tagFormat: ''
-    }
+      tagFormat: '',
+    },
   }
   const SENTRY_HOST = 'https://sentry.io'
   const tagsUrl = 'https://myreleases/'
@@ -83,29 +83,29 @@ describe('Publish', () => {
           url: 'github.com/eclass/semantic-release-sentry-releases',
           provider: {
             id: 'integrations:github',
-            name: 'Github'
+            name: 'Github',
           },
           status: 'active',
           dateCreated: '2020-10-30T20:05:57.053153Z',
           integrationId: '1',
-          externalSlug: 1
-        }
+          externalSlug: 1,
+        },
       ])
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .post(PATH_RELEASE, body => body.projects.includes('error'))
+      .post(PATH_RELEASE, (body) => body.projects.includes('error'))
       .reply(400, {
         commits: {
-          repository: ['Ensure this field has no more than 64 characters.']
-        }
+          repository: ['Ensure this field has no more than 64 characters.'],
+        },
       })
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .post(PATH_RELEASE, body => body.projects.includes('error'))
+      .post(PATH_RELEASE, (body) => body.projects.includes('error'))
       .reply(500)
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .post(PATH_RELEASE, body => body.projects.includes('server'))
+      .post(PATH_RELEASE, (body) => body.projects.includes('server'))
       .replyWithError('server error')
     nock(SENTRY_HOST, NOCK_OPTIONS)
-      .post(PATH_RELEASE, body => body.projects.includes('invalid'))
+      .post(PATH_RELEASE, (body) => body.projects.includes('invalid'))
       .reply(201, 'success')
     nock(SENTRY_HOST, NOCK_OPTIONS)
       .post(PATH_RELEASE)
@@ -125,13 +125,13 @@ describe('Publish', () => {
         projects: [
           {
             name: 'project',
-            slug: 'project'
-          }
+            slug: 'project',
+          },
         ],
         ref: '6ba09a7c53235ee8a8fa5ee4c1ca8ca886e7fdbb',
         shortVersion: '1.0.0',
         url: null,
-        version: '1.0.0'
+        version: '1.0.0',
       })
       .post('/api/0/organizations/valid/releases/1.0.0/files/')
       .reply(201)
@@ -142,7 +142,7 @@ describe('Publish', () => {
         environment: ctx.env.SENTRY_ENVIRONMENT,
         dateStarted: '2020-02-05T10:29:59Z',
         dateFinished: '2020-02-05T10:30:43Z',
-        id: '5044917'
+        id: '5044917',
       })
 
     nock(SENTRY_HOST, NOCK_OPTIONS)
@@ -163,13 +163,13 @@ describe('Publish', () => {
         projects: [
           {
             name: 'project',
-            slug: 'project'
-          }
+            slug: 'project',
+          },
         ],
         ref: '6ba09a7c53235ee8a8fa5ee4c1ca8ca886e7fdbb',
         shortVersion: 'web1-1.0.0',
         url: null,
-        version: 'web1-1.0.0'
+        version: 'web1-1.0.0',
       })
       .post('/api/0/organizations/valid/releases/web1-1.0.0/deploys/')
       .reply(201, {
@@ -178,7 +178,7 @@ describe('Publish', () => {
         environment: 'production',
         dateStarted: '2020-02-05T10:29:59Z',
         dateFinished: '2020-02-05T10:30:43Z',
-        id: '5044917'
+        id: '5044917',
       })
   })
 
@@ -252,10 +252,10 @@ describe('Publish', () => {
     // @ts-ignore
     const result = await publish(
       { tagsUrl, sourcemaps, urlPrefix, releasePrefix },
-      ctx
+      ctx,
     )
     expect(result.release.version).to.equal(
-      `${releasePrefix}-${ctx.nextRelease.version}`
+      `${releasePrefix}-${ctx.nextRelease.version}`,
     )
   })
 

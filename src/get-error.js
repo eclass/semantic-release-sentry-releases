@@ -3,9 +3,9 @@ const ERROR_DEFINITIONS = require('./errors')
 
 /** @typedef {import('./types').Context} Context */
 /**
- * @param {string} code -
- * @param {Context} ctx -
- * @returns {Error} -
+ * @param {string} code -.
+ * @param {Context} ctx -.
+ * @returns {Error} -.
  * @example
  * const throw getError('CUSTOMERROR')
  */

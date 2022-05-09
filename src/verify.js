@@ -5,12 +5,12 @@ const getError = require('./get-error')
 const { verify } = require('./request')
 
 /**
- * @param {string} url -
- * @returns {boolean} -
+ * @param {string} url -.
+ * @returns {boolean} -.
  * @example
  * isValidUrl(url)
  */
-const isValidUrl = url => {
+const isValidUrl = (url) => {
   try {
     // eslint-disable-next-line no-unused-vars
     const { href } = new URL(url)
@@ -21,11 +21,11 @@ const isValidUrl = url => {
 }
 
 /**
- * @param {Config} pluginConfig -
- * @param {Context} ctx -
- * @param {string} org -
- * @param {string} url -
- * @returns {Array<Error>} -
+ * @param {Config} pluginConfig -.
+ * @param {Context} ctx -.
+ * @param {string} org -.
+ * @param {string} url -.
+ * @returns {Array<Error>} -.
  * @example
  * getErrors(pluginConfig, ctx, org, url)
  */
@@ -54,9 +54,9 @@ const getErrors = (pluginConfig, ctx, org, url) => {
  * @typedef {import('./types').Config} Config
  */
 /**
- * @param {Config} pluginConfig -
- * @param {Context} ctx -
- * @returns {Promise<*>} -
+ * @param {Config} pluginConfig -.
+ * @param {Context} ctx -.
+ * @returns {Promise<*>} -.
  * @example
  * verifyConditions(pluginConfig, ctx)
  */

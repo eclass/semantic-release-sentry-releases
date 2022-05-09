@@ -6,7 +6,7 @@ const {
   createRelease,
   createDeploy,
   uploadSourceFiles,
-  getRepositoryName
+  getRepositoryName,
 } = require('./request')
 
 /**
@@ -18,9 +18,9 @@ const {
  */
 
 /**
- * @param {Config} pluginConfig -
- * @param {Context} ctx -
- * @returns {SentryDeployParams} -
+ * @param {Config} pluginConfig -.
+ * @param {Context} ctx -.
+ * @returns {SentryDeployParams} -.
  * @example
  * getDeployData(pluginConfig, ctx)
  */
@@ -28,7 +28,7 @@ const getDeployData = (pluginConfig, ctx) => {
   /** @type {SentryDeployParams} */
   const deployData = {
     environment:
-      ctx.env.SENTRY_ENVIRONMENT || pluginConfig.environment || 'production'
+      ctx.env.SENTRY_ENVIRONMENT || pluginConfig.environment || 'production',
   }
   if (pluginConfig.deployName) {
     deployData.name = pluginConfig.deployName
@@ -46,9 +46,9 @@ const getDeployData = (pluginConfig, ctx) => {
 }
 
 /**
- * @param {Config} pluginConfig -
- * @param {Context} ctx -
- * @returns {Promise<PublishResult>} -
+ * @param {Config} pluginConfig -.
+ * @param {Context} ctx -.
+ * @returns {Promise<PublishResult>} -.
  * @example
  * publish(pluginConfig, ctx)
  */
@@ -63,7 +63,7 @@ module.exports = async (pluginConfig, ctx) => {
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
       url,
-      pluginConfig.repositoryUrl || ctx.options.repositoryUrl
+      pluginConfig.repositoryUrl || ctx.options.repositoryUrl,
     )
     ctx.logger.log('Retrieving commits data')
     const commits = await parseCommits(pluginConfig, ctx)
@@ -75,7 +75,7 @@ module.exports = async (pluginConfig, ctx) => {
     const releaseDate = {
       commits,
       version: sentryReleaseVersion,
-      projects: [project]
+      projects: [project],
     }
     if (tagsUrl !== '') {
       releaseDate.url = `${tagsUrl}/v${ctx.nextRelease.version}`
@@ -85,7 +85,7 @@ module.exports = async (pluginConfig, ctx) => {
       releaseDate,
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
-      url
+      url,
     )
     ctx.logger.log('Release created')
     process.env.SENTRY_ORG = org
@@ -96,7 +96,7 @@ module.exports = async (pluginConfig, ctx) => {
       ctx.logger.log('Searching sourcemaps in %s', sourcemaps)
       const assets = await getAssets(
         pluginConfig.sourcemaps,
-        pluginConfig.urlPrefix
+        pluginConfig.urlPrefix,
       )
       ctx.logger.log('Uploading sourcemaps from %s', sourcemaps)
       await uploadSourceFiles(
@@ -105,7 +105,7 @@ module.exports = async (pluginConfig, ctx) => {
         ctx.env.SENTRY_AUTH_TOKEN,
         org,
         url,
-        sentryReleaseVersion
+        sentryReleaseVersion,
       )
       ctx.logger.log('Sourcemaps uploaded')
     }
@@ -116,7 +116,7 @@ module.exports = async (pluginConfig, ctx) => {
       ctx.env.SENTRY_AUTH_TOKEN,
       org,
       url,
-      sentryReleaseVersion
+      sentryReleaseVersion,
     )
     ctx.logger.log('Deploy created')
     return { release, deploy }

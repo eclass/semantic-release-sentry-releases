@@ -16,19 +16,19 @@ describe('Verify', () => {
       .reply(404, { detail: 'The requested resource does not exist.' })
     nock(SENTRY_HOST, {
       reqheaders: {
-        authorization: 'Bearer invalid'
-      }
+        authorization: 'Bearer invalid',
+      },
     })
       .get('/api/0/organizations/valid/releases/')
       .reply(401, { detail: 'Invalid token.' })
     nock(SENTRY_HOST, {
       reqheaders: {
-        authorization: 'Bearer without_permissions'
-      }
+        authorization: 'Bearer without_permissions',
+      },
     })
       .get('/api/0/organizations/valid/releases/')
       .reply(403, {
-        detail: 'You do not have permission to perform this action.'
+        detail: 'You do not have permission to perform this action.',
       })
     nock(SENTRY_HOST, NOCK_OPTIONS)
       .get('/api/0/organizations/valid/releases/')
