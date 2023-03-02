@@ -167,9 +167,9 @@ describe('Publish', () => {
           },
         ],
         ref: '6ba09a7c53235ee8a8fa5ee4c1ca8ca886e7fdbb',
-        shortVersion: 'web1-1.0.0',
+        shortVersion: 'web1@1.0.0',
         url: null,
-        version: 'web1-1.0.0',
+        version: 'web1@1.0.0',
       })
       .post('/api/0/organizations/valid/releases/web1-1.0.0/deploys/')
       .reply(201, {
@@ -255,7 +255,7 @@ describe('Publish', () => {
       ctx,
     )
     expect(result.release.version).to.equal(
-      `${releasePrefix}-${ctx.nextRelease.version}`,
+      `${releasePrefix}@${ctx.nextRelease.version}`,
     )
   })
 
