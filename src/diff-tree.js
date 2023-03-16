@@ -35,7 +35,6 @@ const getCommitPatchSet = (basedir, rev = 'HEAD') => {
     gitDiffTree(repoPath, { rev })
       .on(
         'data',
-        // eslint-disable-next-line valid-jsdoc, jsdoc/require-example
         /**
          * @param {GIT_DIFF_TREE_TYPES} type -.
          * @param {GitDiffTreeData} data -.

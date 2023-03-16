@@ -19,7 +19,6 @@ async function getFiles(
   appendPath = false,
   extensions = ['.js', '.map', '.jsbundle', '.bundle'],
 ) {
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   const entries = await fs.readdir(dir, { withFileTypes: true })
 
   // Get files within the current directory and add a path key to the file objects

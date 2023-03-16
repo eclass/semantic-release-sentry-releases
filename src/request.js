@@ -37,7 +37,6 @@ const request = (path, data, token, url) =>
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        // eslint-disable-next-line sonarjs/no-duplicate-string
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(postData),
       },
@@ -271,7 +270,6 @@ const getRepositoryName = (token, org, url, repositoryUrl) =>
           if (res.statusCode === 200) {
             const found = body.find((repository) => {
               const name = repository.name.replace(/\s/g, '')
-              // eslint-disable-next-line security/detect-non-literal-regexp
               const pattern = new RegExp(`${name}(.git)?$`)
               return pattern.test(repositoryUrl)
             })

@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 // @ts-ignore
 const pkg = require('../package.json')
 
@@ -150,4 +149,3 @@ Please make sure to set the \`SENTRY_ORG\` environment variable in your CI with 
     }),
   ],
 ])
-/* eslint-enable sonarjs/no-duplicate-string */

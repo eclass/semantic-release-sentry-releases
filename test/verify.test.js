@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 const { describe, it, beforeEach } = require('mocha')
 const { expect } = require('chai')
 const nock = require('nock')
@@ -169,4 +168,3 @@ describe('Verify', () => {
     expect(await verify({}, { env })).to.be.a('undefined')
   })
 })
-/* eslint-enable sonarjs/no-duplicate-string */

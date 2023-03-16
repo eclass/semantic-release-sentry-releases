@@ -194,7 +194,6 @@ describe('Publish', () => {
     }
   })
 
-  // eslint-disable-next-line sonarjs/no-identical-functions
   it(SERVER_ERROR_TITLE, async () => {
     try {
       const { cwd } = getCwd()

@@ -1,6 +1,6 @@
 {
   "extends": ["config:js-lib"],
-  "assignees": ["lgaticaq"],
+  "assignees": ["ryshu"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],

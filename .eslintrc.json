@@ -1,3 +1,11 @@
 {
-  "extends": ["@eclass", "plugin:prettier/recommended"]
+  "extends": ["standard", "plugin:prettier/recommended"],
+  "settings": {
+    "jsdoc": {
+      "preferredTypes": {
+        "object": "Object"
+      },
+      "mode": "typescript"
+    }
+  }
 }
