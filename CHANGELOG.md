@@ -1,14 +1,12 @@
 # [3.0.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.11.0...v3.0.0) (2022-02-10)
 
-
 ### Bug Fixes
 
-* **deps:** update min node and semantic-release ([ea325ba](https://github.com/eclass/semantic-release-sentry-releases/commit/ea325ba294fb788b97abddf8315960c3a65d81d6))
-
+- **deps:** update min node and semantic-release ([ea325ba](https://github.com/eclass/semantic-release-sentry-releases/commit/ea325ba294fb788b97abddf8315960c3a65d81d6))
 
 ### BREAKING CHANGES
 
-* **deps:** Set min node version to 14.17.0 and semantic-release 18.0.0
+- **deps:** Set min node version to 14.17.0 and semantic-release 18.0.0
 
 # [2.11.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.10.1...v2.11.0) (2021-10-01)
 
