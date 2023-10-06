@@ -11,6 +11,9 @@ export interface Context
     SemanticReleaseResult {
   commits?: Commit[]
   message?: string
+  logger?: any
+  options?: any
+  nextRelease?: any
 }
 
 export interface Config {
