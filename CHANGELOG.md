@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v3.0.0...v3.1.0) (2023-10-06)
+
+
+### Features
+
+* **update:** release version ([c512e07](https://github.com/eclass/semantic-release-sentry-releases/commit/c512e0739c3e56ba045c3a42cbda9521780e489f))
+
 # [3.0.0](https://github.com/eclass/semantic-release-sentry-releases/compare/v2.11.0...v3.0.0) (2022-02-10)
 
 ### Bug Fixes
