@@ -42,7 +42,7 @@ async function getFiles(
   */
   for (const folder of folders) {
     files.push(
-      ...(await getFiles(path.join(dir, folder.name), urlPrefix, true)),
+      ...(await getFiles(path.join(dir, folder.name), path.join(urlPrefix, folder.name), false)),
     )
   }
 
