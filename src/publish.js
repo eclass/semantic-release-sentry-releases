@@ -69,7 +69,7 @@ module.exports = async (pluginConfig, ctx) => {
     const commits = await parseCommits(pluginConfig, ctx)
     ctx.logger.log('Commit data retrieved')
     const sentryReleaseVersion = pluginConfig.releasePrefix
-      ? `${pluginConfig.releasePrefix}-${ctx.nextRelease.version}`
+      ? `${pluginConfig.releasePrefix}@${ctx.nextRelease.version}`
       : ctx.nextRelease.version
     /** @type {SentryReleaseParams} */
     const releaseDate = {
