@@ -31,6 +31,7 @@ export interface Config {
   urlPrefix?: string
   rewrite?: boolean
   releasePrefix?: string
+  releasePrefixSeparator?: string
   pathToGitFolder?: string
 }
 

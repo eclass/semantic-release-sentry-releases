@@ -58,6 +58,7 @@ module.exports = async (pluginConfig, ctx) => {
     const project = ctx.env.SENTRY_PROJECT || pluginConfig.project
     const org = ctx.env.SENTRY_ORG || pluginConfig.org
     const url = ctx.env.SENTRY_URL || pluginConfig.url || 'https://sentry.io/'
+    const releasePrefixSeparator = pluginConfig.releasePrefixSeparator || '-'
     ctx.logger.log('Retrieving repository name')
     pluginConfig.repositoryUrl = await getRepositoryName(
       ctx.env.SENTRY_AUTH_TOKEN,
@@ -69,7 +70,7 @@ module.exports = async (pluginConfig, ctx) => {
     const commits = await parseCommits(pluginConfig, ctx)
     ctx.logger.log('Commit data retrieved')
     const sentryReleaseVersion = pluginConfig.releasePrefix
-      ? `${pluginConfig.releasePrefix}-${ctx.nextRelease.version}`
+      ? `${pluginConfig.releasePrefix}${releasePrefixSeparator}${ctx.nextRelease.version}`
       : ctx.nextRelease.version
     /** @type {SentryReleaseParams} */
     const releaseDate = {
