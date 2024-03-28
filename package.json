@@ -62,7 +62,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-sonarjs": "0.11.0",
+    "eslint-plugin-sonarjs": "0.25.0",
     "husky": "8.0.3",
     "lint-staged": "12.5.0",
     "mocha": "9.2.2",
